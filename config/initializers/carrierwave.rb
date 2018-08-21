@@ -1,3 +1,4 @@
+require 'fog-aws'
 CarrierWave.configure do |config|
 
    # For testing, upload files to local tmp folder.

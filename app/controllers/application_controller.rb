@@ -29,7 +29,9 @@ class ApplicationController < ActionController::Base
 				:country,
 				:date_of_birth,
 				:gender,
-				:role
+				:role,
+        :qualification,
+        :specialization
 			])
   end
 end

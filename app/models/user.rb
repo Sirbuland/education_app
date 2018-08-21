@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_and_belongs_to_many :languages
+  accepts_nested_attributes_for :languages
 
   mount_uploader :profile_pic, ProfilePictureUploader
 

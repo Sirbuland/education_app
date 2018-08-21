@@ -5,5 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-languages = Language.create name: I18nData.languages.values
+Language.destroy_all
+I18nData.languages.values.each do |language|
+	Language.create name: language
+end

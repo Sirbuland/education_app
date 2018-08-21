@@ -23,6 +23,7 @@ class TutorsController < ApplicationController
   end
 
   def save_languages languages
+    @tutor.languages.destroy_all
   	languages.each do |language|
   		@tutor.languages.find_or_create_by(name: language) if language.present?
   	end

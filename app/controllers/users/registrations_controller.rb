@@ -20,6 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.save
     yield resource if block_given?
     if resource.persisted?
+      save_languages params[:user][:language_ids], resource
       if resource.active_for_authentication?
         respond_with resource, location: after_sign_up_path_for(resource)
       else
@@ -67,6 +68,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:success] = "You are signed up successfully. Please login to view your app."
     end
     root_url
+  end
+
+  def save_languages languages, resource
+    resource.languages.destroy_all
+    languages.each do |language|
+      resource.languages.find_or_create_by(name: language) if language.present?
+    end
   end
 
   # If you have extra params to permit, append them to the sanitizer.

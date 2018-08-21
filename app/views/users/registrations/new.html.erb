@@ -12,6 +12,14 @@
         <%= f.input :username %>
         <%= f.input :full_name %>
         <%= f.input :email, autofocus: true, autocomplete: "email" %>
+        <% if params[:user] == 'tutor' %>
+          <%= f.input :city %>
+          <%= f.input :country %>
+          <%= f.label :languages %>
+          <%= f.association :languages, collection: Language.order(:name), include_blank: false, label: false, input_html: { class: "multiselect-search form-control", multipe: "multipe" } %>
+          <%= f.input :qualification %>
+          <%= f.input :occupation %>
+        <% end %>
 
         <%= f.input :password, autocomplete: "new-password", label: "Password <em>(6 characters minimum)</em>".html_safe %>
 

@@ -1,0 +1,56 @@
+body {
+  overflow-x: hidden;
+}
+
+.page-content {
+  width: 80%;
+  vertical-align: top;
+}
+
+.page-content,
+.page-sidebar {
+	display: inline-block;
+}
+
+.home-page {
+	position: absolute;
+  text-align: center;
+  top: 35%;
+  left: 50%;
+  margin-left: -200px
+}
+
+.dashed-border {
+  border: #708992 1px dashed;
+}
+
+.img-circle{
+  border-radius: 50%;
+}
+
+.avatartop {
+  overflow:hidden;
+  width:40px;height:40px;
+}
+
+.navbar {
+	margin-bottom: 0px !important;
+}
+
+.form-area {
+  width: 50%;
+}
+
+.alert {
+  position: absolute;
+  opacity: 0.7;
+  top: 5%;
+  left: 15%;
+  width: 65%;
+}
+
+.password-area {
+  border: solid 1px #888;
+  border-radius: 6px;
+  padding: 10px;
+}

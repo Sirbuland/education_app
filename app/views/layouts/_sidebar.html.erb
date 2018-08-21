@@ -1,0 +1,23 @@
+<nav id="sidebar">
+  <ul class="list-unstyled components">
+    <% if current_user.role == 0 %>
+      <li class="active">
+        <%= link_to 'Personal Information', edit_student_path(id: current_user.id) %>
+      </li>
+      <li>
+        <%= link_to 'Accounts Settings', edit_user_path(current_user) %>
+      </li>
+      <li>
+        <%= link_to 'Purchased Packages', '#' %>
+      </li>
+    <% elsif current_user.role == 1 %>
+      <li class="active">
+        <%= link_to 'Tutor Profile', edit_tutor_path(id: current_user.id) %>
+      </li>
+      <li>
+        <%= link_to 'Accounts Settings', edit_user_path(current_user) %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+             

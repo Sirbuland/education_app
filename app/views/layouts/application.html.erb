@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EducationApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<%= render 'layouts/nav_header' %>
+  <%= render 'layouts/flash_messages' %>
+	<div class="page-view">
+		<% if user_signed_in? %>
+			<div class="page-sidebar">
+				<%= render 'layouts/sidebar' %>
+			</div>
+			<div class="page-content">
+				<%= yield %>
+			</div>
+		<% else %>
+			<%= yield %>
+		<% end %>
+	</div>
+</body>
+</html>

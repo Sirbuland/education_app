@@ -30,7 +30,10 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'font-awesome-rails'
 gem 'simple_form'
 gem 'country_select'
+gem 'popper_js', '~> 1.11', '>= 1.11.1'
 gem 'carrierwave', '~> 1.0'
+gem 'bootstrap-multiselect-rails'
+gem 'i18n_data'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -53,6 +56,7 @@ group :development, :test do
   gem "binding_of_caller"
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'dotenv-rails'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 end
 

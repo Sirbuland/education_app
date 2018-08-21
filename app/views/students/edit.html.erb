@@ -3,7 +3,7 @@
 	<div class="col-12 offset-1">
 		<div class="form-area mt-4">
 			<%= simple_form_for @student, url: student_path(id: current_user.id), method: :put, html: {multipart: true} do |f| %>
-				<h3>Account Settings</h3>
+				<h3>Personal Information</h3>
 				<%= f.input :username %>
 				<%= f.input :full_name, label: 'Name' %>
 				<%= f.input :occupation %>

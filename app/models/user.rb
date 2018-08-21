@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_and_belongs_to_many :languages
+
   mount_uploader :profile_pic, ProfilePictureUploader
 
   enum roles: [:Student, :Tutor]

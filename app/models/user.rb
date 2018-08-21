@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  mount_uploader :profile_pic, ProfilePictureUploader
+
   enum roles: [:Student, :Tutor]
   enum genders: [:Male, :Female]
 end

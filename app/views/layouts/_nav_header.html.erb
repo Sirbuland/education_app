@@ -9,6 +9,7 @@
 	<% if user_signed_in? %>
 	  <ul class="nav navbar-nav pull-right">
 			<li class="nav-item ml-2 mr-2 dashed-border img-circle avatartop">
+        <%= image_tag current_user.profile_pic, class: 'img-fluid' %>
 			</li>
 			<li class="nav-item">
 				<%= link_to 'Logout', destroy_user_session_path, class: "nav-link" %>

@@ -31,7 +31,8 @@ class UsersController < ApplicationController
   		:gender,
   		:date_of_birth,
   		:password,
-  		:password_confirmation
+  		:password_confirmation,
+  		:current_password
   	)
   end
 

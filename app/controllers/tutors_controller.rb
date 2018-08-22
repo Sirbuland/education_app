@@ -22,10 +22,13 @@ class TutorsController < ApplicationController
   	@tutor = current_user
   end
 
-  def save_languages languages
+  def save_languages language_ids
     @tutor.languages.destroy_all
-  	languages.each do |language|
-  		@tutor.languages.find_or_create_by(name: language) if language.present?
+  	language_ids.each do |language_id|
+      if language_id.present?
+        language = Language.find_by id: language_id
+  		  @tutor.languages << language if language.present?
+      end
   	end
   end
 

@@ -11,7 +11,7 @@
         <%= link_to 'Purchased Packages', packages_path %>
       </li>
       <li class="<%= activated_class('credits', 'index') %>">
-        <%= link_to 'But credits', credits_path %>
+        <%= link_to 'Buy credits', credits_path %>
       </li>
     <% elsif current_user.role == 1 %>
       <li class="<%= activated_class('tutors', 'edit') %>">

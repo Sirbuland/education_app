@@ -7,11 +7,32 @@
 			$<h3 class="d-inline-block"><b><%= package.price %></b></h3>
 		</div>
 		<div class="card-area pl-3 pr-3">
-			<p class="first-p"><%= package.total_number_of_characters %></p>
+			<p class="first-p">
+				<span>
+					<%= package.total_number_of_characters %>
+				</span>
+				<small>
+					characters
+				</small>
+			</p>
 			<hr/>
-			<p><%= package.total_credits %></p>
+			<p>
+				<span>
+					<%= package.total_credits %>
+				</span>
+				<small>
+					credits
+				</small>
+			</p>
 			<hr/>
-			<p><%= package.bonus %></p>
+			<p>
+				<span>
+					<%= package.bonus %>
+				</span>
+				<small>
+					free credits
+				</small>
+			</p>
 		</div>
 	</div>
 </div>

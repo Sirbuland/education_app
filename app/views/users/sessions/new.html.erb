@@ -7,9 +7,6 @@
 
           <%= f.input :password, autocomplete: "current-password", label: "Password" %>
 
-          <%= f.input :role, collection: User.roles, label: "Select account type", include_blank: false %>
-          
-
         <% if devise_mapping.rememberable? -%>
             <%= f.check_box :remember_me %>
             <%= f.label :remember_me %>

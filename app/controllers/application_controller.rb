@@ -7,10 +7,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    if current_user.role == 0
-      edit_student_path(id: current_user.id)
-    elsif current_user.role == 1
-      edit_tutor_path(id: current_user.id)
+    if resource.super_admin
+      admin_index_path
+    elsif resource.role == 0
+      edit_student_path(id: resource.id)
+    elsif resource.role == 1
+      edit_tutor_path(id: resource.id)
     end
   end
 

@@ -17,7 +17,16 @@
       <li>
         <%= link_to 'Accounts Settings', edit_user_path(current_user) %>
       </li>
+    <% elsif current_user.super_admin %>
+      <li class="active">
+        <%= link_to 'Applications Pending', pending_applications_path %>
+      </li>
+      <li>
+        <%= link_to 'Create New Packages', new_package_path %>
+      </li>
+      <li>
+        <%= link_to 'All Packages', packages_path %>
+      </li>
     <% end %>
   </ul>
 </nav>
-             

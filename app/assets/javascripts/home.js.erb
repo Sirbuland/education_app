@@ -7,4 +7,40 @@ $(document).ready(function() {
     filterPlaceholder: 'Search for something...',
     enableCaseInsensitiveFiltering: true
   });
+
+  $('#pending-applications').dataTable({
+    sPaginationType: "full_numbers",
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    aoColumnDefs: [
+    	{ "targets": [0], "searchable": true, "orderable": false, "visible": true, name: 'id' },
+      { "targets": [1], "searchable": true, "orderable": false, "visible": true, name: 'name' },
+      { "targets": [2], "searchable": true, "orderable": false, "visible": true, name: 'country' },
+      { "targets": [3], "searchable": true, "orderable": false, "visible": true, name: 'email' },
+      { "targets": [4], "searchable": true, "orderable": false, "visible": true, name: 'qualification' },
+      { "targets": [5], "searchable": true, "orderable": false, "visible": true, name: 'occupation' },
+      { "targets": [6], "searchable": false, "orderable": false, "visible": true, name: 'join_date' },
+      { "targets": [7], "searchable": false, "orderable": false, "visible": true, name: 'join_date' }
+    ],
+    sAjaxSource: $('#products').data('source')
+  })
+
+// 'bJQueryUI': true,
+//     "processing": false,
+//     "bServerSide": true,
+//     "pageLength": 25,
+//     "columnDefs": [
+//       { "targets": [0], "searchable": true, "orderable": true, "visible": true },
+//       { "targets": [1], "searchable": true, "orderable": true, "visible": true },
+//       { "targets": [2], "searchable": true, "orderable": true, "visible": true },
+//       { "targets": [3], "searchable": true, "orderable": true, "visible": true },
+//       { "targets": [4], "searchable": true, "orderable": true, "visible": true },
+//       { "targets": [5], "searchable": true, "orderable": false, "visible": true },
+//       { "targets": [6], "searchable": false, "orderable": false, "visible": true },
+//       { "targets": [7], "searchable": false, "orderable": false, "visible": true },
+//     ],
+//     "ajax": company_usersUrl
+
 })
+

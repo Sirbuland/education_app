@@ -35,6 +35,9 @@ gem 'fog-aws'
 gem 'carrierwave', '~> 0.11.2'
 gem 'bootstrap-multiselect-rails'
 gem 'i18n_data'
+gem 'jquery-datatables'
+gem 'ajax-datatables-rails'
+gem 'will_paginate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

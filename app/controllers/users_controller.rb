@@ -8,7 +8,6 @@ class UsersController < ApplicationController
 
   def update
   	method = user_params[:password].blank? ? :update_without_password : :update_with_password
-
 		if @user.send(method, user_params)
       sign_in @user, bypass: true
 			flash[:success] = "Your information has been saved successfully."

@@ -10,8 +10,11 @@ Rails.application.routes.draw do
     invitations:    'users/invitations'
   }, sign_out_via: [:get, :delete]
 
-  resources :users
+  resources :users, only: [:edit, :update]
   resources :tutors
   resources :students
+  resources :admin, only: [:index]
+  resources :pending_applications, only: [:index, :update]
+  resources :packages
 
 end

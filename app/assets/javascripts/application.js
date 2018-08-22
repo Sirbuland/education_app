@@ -15,4 +15,5 @@
 //= require popper
 //= require bootstrap
 //= require bootstrap-multiselect
+//= require datatables
 //= require home

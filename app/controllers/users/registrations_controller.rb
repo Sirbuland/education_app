@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.save
     yield resource if block_given?
     if resource.persisted?
-      save_languages params[:user][:language_ids], resource
+      save_languages params[:user][:language_ids], resource if params[:user_type].present?
       if resource.active_for_authentication?
         respond_with resource, location: after_sign_up_path_for(resource)
       else
@@ -31,7 +31,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      respond_with resource
+      flash[:error] = "Errors occurred while signup. #{resource.errors.full_messages.to_sentence}"
+      if params[:user_type].present?
+        redirect_to new_user_registration_path(user: "tutor")
+      else
+        respond_with resource
+      end
     end
   end
 

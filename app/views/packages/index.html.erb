@@ -1,9 +1,15 @@
 <div class="container">
 	<div class="heading mt-4 mb-2">
-		<h3 class="float-left">
-			All Packages
-		</h3>
-		<%= link_to 'Add New Package', new_package_path, class: "float-right btn btn-success" %>
+		<% if current_user.super_admin %>
+			<h3 class="float-left">
+				All Packages
+			</h3>
+			<%= link_to 'Add New Package', new_package_path, class: "float-right btn btn-success" %>
+		<% else %>
+			<h3 class="float-left">
+				Purchased packages
+			</h3>
+		<% end %>
 	</div>
 	<br/>
 	<div class="content-area mt-4">

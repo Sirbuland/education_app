@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_and_belongs_to_many :languages
   accepts_nested_attributes_for :languages
 
+  has_many :packages
+
   mount_uploader :profile_pic, ProfilePictureUploader
 
   enum roles: [:Student, :Tutor]

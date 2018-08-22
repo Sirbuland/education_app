@@ -1,30 +1,33 @@
 <nav id="sidebar">
   <ul class="list-unstyled components">
     <% if current_user.role == 0 %>
-      <li class="active">
+      <li class="<%= activated_class('students', 'edit') %>">
         <%= link_to 'Personal Information', edit_student_path(id: current_user.id) %>
       </li>
-      <li>
+      <li class="<%= activated_class('users', 'edit') %>">
         <%= link_to 'Accounts Settings', edit_user_path(current_user) %>
       </li>
-      <li>
-        <%= link_to 'Purchased Packages', '#' %>
+      <li class="<%= activated_class('packages', 'index') %>">
+        <%= link_to 'Purchased Packages', packages_path %>
+      </li>
+      <li class="<%= activated_class('credits', 'index') %>">
+        <%= link_to 'But credits', credits_path %>
       </li>
     <% elsif current_user.role == 1 %>
-      <li class="active">
+      <li class="<%= activated_class('tutors', 'edit') %>">
         <%= link_to 'Tutor Profile', edit_tutor_path(id: current_user.id) %>
       </li>
-      <li>
+      <li class="<%= activated_class('users', 'edit') %>">
         <%= link_to 'Accounts Settings', edit_user_path(current_user) %>
       </li>
     <% elsif current_user.super_admin %>
-      <li class="active">
+      <li class="<%= activated_class('pending_applications', 'index') %>">
         <%= link_to 'Applications Pending', pending_applications_path %>
       </li>
-      <li>
+      <li class="<%= activated_class('packages', 'new') %>">
         <%= link_to 'Create New Packages', new_package_path %>
       </li>
-      <li>
+      <li class="<%= activated_class('packages', 'index') %>">
         <%= link_to 'All Packages', packages_path %>
       </li>
     <% end %>

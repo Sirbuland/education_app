@@ -72,3 +72,33 @@ body {
     width: 40px;
   }
 }
+
+.card{
+  text-align: center;
+  overflow: hidden;
+  display: block;
+  margin-bottom: 0px;
+  line-height: 1.32857143;
+  background-color: #fff;
+  border-radius: 0;
+  -webkit-transition: border .2s ease-in-out;
+  transition: border .2s ease-in-out;
+    -webkit-box-shadow: 0 4px 6px -6px black;
+   -moz-box-shadow: 0 4px 6px -6px black;
+        box-shadow: 0 4px 6px -6px black;
+        min-height:267px;
+  &:hover{
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.card-header {
+  background-color: #717fbd;
+  color: #fff;
+}
+
+.card-area{
+ p:first-child {
+    margin-top: 1rem !important;
+  }
+}

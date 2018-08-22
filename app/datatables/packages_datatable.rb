@@ -1,5 +1,5 @@
 class PackagesDatatable
-	delegate :params, :h, :link_to, :number_to_currency, :edit_package_path, :package_path, to: :@view
+	delegate :params, :h, :link_to, :number_to_currency, :edit_package_path, :current_user, :package_path, to: :@view
 
   def initialize(view)
     @view = view
@@ -36,12 +36,17 @@ class PackagesDatatable
   end
 
   def fetch_packages
-    packages = Package.order("#{sort_column} #{sort_direction}")
-    packages = packages.page(page).per_page(per_page)
-    if params[:search][:value].present? and params[:search][:value] != ''
-      packages = packages.where("name like :search", search: "%#{params[:search]}%")
+    if current_user.super_admin
+      @packages = Package.order("#{sort_column} #{sort_direction}")
+    else
+      @packages = current_user.packages.order("#{sort_column} #{sort_direction}")
     end
-    packages
+    
+    @packages = @packages.page(page).per_page(per_page)
+    if params[:search][:value].present? and params[:search][:value] != ''
+      @packages = @packages.where("name like :search", search: "%#{params[:search]}%")
+    end
+    @packages
   end
 
   def page

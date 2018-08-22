@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
   resources :pending_applications, only: [:index, :update]
   resources :packages
+  resources :credits
 
 end

@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-12 offset-1">
 		<div class="form-area mt-4">
-			<%= simple_form_for @package, url: packages_path, method: :post do |f| %>
+			<%= simple_form_for @package, url: package_path(id: @package.id), method: :put do |f| %>
 				<h3>Edit package</h3>
 				<%= f.input :name, label: 'Package Name' %>
 				<%= f.input :price %>

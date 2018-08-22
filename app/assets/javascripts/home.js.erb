@@ -26,6 +26,24 @@ $(document).ready(function() {
     sAjaxSource: $('#products').data('source')
   })
 
+  $('#packages-table').dataTable({
+    sPaginationType: "full_numbers",
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    aoColumnDefs: [
+      { "targets": [0], "searchable": true, "orderable": false, "visible": true, name: 'name' },
+      { "targets": [1], "searchable": true, "orderable": false, "visible": true, name: 'price' },
+      { "targets": [2], "searchable": true, "orderable": false, "visible": true, name: 'total_characters' },
+      { "targets": [3], "searchable": true, "orderable": false, "visible": true, name: 'total_credits' },
+      { "targets": [4], "searchable": true, "orderable": false, "visible": true, name: 'bonus' },
+      { "targets": [5], "searchable": true, "orderable": false, "visible": true, name: 'created_date' },
+      { "targets": [6], "searchable": false, "orderable": false, "visible": true, name: 'edit' },
+      { "targets": [7], "searchable": false, "orderable": false, "visible": true, name: 'delete' }
+    ],
+    sAjaxSource: $('#products').data('source')
+  })
+
 // 'bJQueryUI': true,
 //     "processing": false,
 //     "bServerSide": true,

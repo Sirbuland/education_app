@@ -4,28 +4,30 @@
 			Pending for Approval (Tutor)
 		</h3>
 	</div>
-	<% if @pending_applications_count > 0 %>
-		<div class="row mt-2">
-			<table id="pending-applications" class="datatable" data-source="<%= pending_applications_path(format: :json) %>">
-			  <thead>
-		    <tr>
-		      <th>ID</th>
-		      <th>Name</th>
-		      <th>Country</th>
-		      <th>Email</th>
-		      <th>Qualification</th>
-		      <th>Occupation</th>
-		      <th>Joined Date</th>
-		      <th>Actions</th>
-		    </tr>
-			  </thead>
-			  <tbody>
-			  </tbody>
-			</table>
-		</div>
-	<% else %>
-		<div class="admin-norecord">
-			<h6>No pending applications are present right now.</h6>
-		</div>
-	<% end %>
+	<div class="content-area">
+		<% if @pending_applications_count > 0 %>
+			<div class="row mt-4 ml-4">
+				<table id="pending-applications" class="datatable table table-striped table-bordered dt-responsive nowrap" data-source="<%= pending_applications_path(format: :json) %>">
+				  <thead>
+			    <tr>
+			      <th>ID</th>
+			      <th>Name</th>
+			      <th>Country</th>
+			      <th>Email</th>
+			      <th>Qualification</th>
+			      <th>Occupation</th>
+			      <th>Joined Date</th>
+			      <th>Actions</th>
+			    </tr>
+				  </thead>
+				  <tbody>
+				  </tbody>
+				</table>
+			</div>
+		<% else %>
+			<div class="admin-norecord">
+				<h6>No pending applications are present right now.</h6>
+			</div>
+		<% end %>
+	</div>
 </div>

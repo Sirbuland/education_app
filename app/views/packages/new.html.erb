@@ -1,2 +1,18 @@
-<h1>Packages#new</h1>
-<p>Find me in app/views/packages/new.html.erb</p>
+<div class="row">
+	<div class="col-12 offset-1">
+		<div class="form-area mt-4">
+			<%= simple_form_for @package, url: packages_path, method: :post do |f| %>
+				<h3>Create a new package</h3>
+				<%= f.input :name, label: 'Package Name' %>
+				<%= f.input :price %>
+				<%= f.input :total_number_of_characters %>
+				<%= f.input :total_credits %>
+				<%= f.input :bonus, label: 'Bonus (Free credit hours for this package)' %>
+
+				<div class="action mb-4">
+        	<%= f.submit 'Create', class: 'btn btn-success' %>
+        </div>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(version: 20180821160600) do
 
   create_table "packages", force: :cascade do |t|
     t.string "name"
-    t.string "price"
-    t.string "total_number_of_characters"
-    t.string "total_credits"
+    t.float "price"
+    t.float "total_number_of_characters"
+    t.float "total_credits"
     t.string "bonus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

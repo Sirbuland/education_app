@@ -1,10 +1,12 @@
 <div class="container">
-	<div class="heading mt-4">
-		<h3>
+	<div class="heading mt-4 mb-2">
+		<h3 class="float-left">
 			All Packages
 		</h3>
+		<%= link_to 'Add New Package', new_package_path, class: "float-right btn btn-success" %>
 	</div>
-	<div class="content-area">
+	<br/>
+	<div class="content-area mt-4">
 		<% if @packages_count > 0 %>
 			<div class="row mt-4 ml-4">
 				<table id="packages-table" class="datatable table table-striped table-bordered dt-responsive nowrap" data-source="<%= packages_path(format: :json) %>">

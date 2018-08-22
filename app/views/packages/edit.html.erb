@@ -1,2 +1,18 @@
-<h1>Packages#edit</h1>
-<p>Find me in app/views/packages/edit.html.erb</p>
+<div class="row">
+	<div class="col-12 offset-1">
+		<div class="form-area mt-4">
+			<%= simple_form_for @package, url: packages_path, method: :post do |f| %>
+				<h3>Edit package</h3>
+				<%= f.input :name, label: 'Package Name' %>
+				<%= f.input :price %>
+				<%= f.input :total_number_of_characters %>
+				<%= f.input :total_credits %>
+				<%= f.input :bonus, label: 'Bonus (Free credit hours for this package)' %>
+
+				<div class="action mb-4">
+        	<%= f.submit 'Update', class: 'btn btn-success' %>
+        </div>
+			<% end %>
+		</div>
+	</div>
+</div>

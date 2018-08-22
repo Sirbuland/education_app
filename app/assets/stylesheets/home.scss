@@ -2,6 +2,11 @@ body {
   overflow-x: hidden;
 }
 
+.heading {
+  display: inline-block;
+    overflow: hidden;
+    width: 100%;
+}
 .page-content {
   width: 80%;
   vertical-align: top;

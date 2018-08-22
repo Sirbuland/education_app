@@ -1,6 +1,6 @@
 class PackagesController < ApplicationController
 	before_action :authenticate_user!
-	before_action :set_package, only: [:show]
+	before_action :set_package, only: [:show, :edit, :update, :destroy]
 
   def index
   	@packages_count = Package.count
@@ -26,11 +26,25 @@ class PackagesController < ApplicationController
   end
 
   def edit
-  	
   end
   
   def update
-  	
+  	if @package.update(package_params)
+      flash[:success] = "Your package has been updated successfully."
+      redirect_to packages_path
+    else
+      flash[:error] = "Error occurred while updating package. #{@package.errors.full_messages.to_sentence}"
+      redirect_back fallback_location: root_path
+    end
+  end
+
+  def destroy
+    if @package.destroy
+      flash[:success] = "Your package has been removed successfully."
+    else
+      flash[:error] = "Error occurred while removing package. #{@package.errors.full_messages.to_sentence}"
+    end
+    redirect_back fallback_location: packages_path
   end
 
   private

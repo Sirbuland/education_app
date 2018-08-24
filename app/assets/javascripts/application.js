@@ -18,3 +18,4 @@
 //= require datatables
 //= require home
 //= require credits
+//= require select_languages

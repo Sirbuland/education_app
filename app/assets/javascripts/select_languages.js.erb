@@ -1,0 +1,25 @@
+$(document).ready(function() {
+	$('body').on('click', '.multiselect-container li input', function() {
+		var checkbox = $(this).find('input');
+		var language_id = checkbox.va();
+		alert(language_id);
+	});
+	
+	var Accessids = "";
+	$(".multiselect-container li.active input").each(function(i,obj)
+	{
+	    Accessids=Accessids+$(obj).val()+",";
+	});
+	console.log(Accessids);
+
+	$('body').on('click', '.remove-lang', function() {
+		var lang_span = $(this).parent('span');
+		var language_id = lang_span.data("langaugeid");
+		var selected_option = $('.multiselect-search :selected').filter(function(){return this.value==language_id})
+		selected_option.removeAttr('selected');
+		selected_option.prop('selected', false);
+		$('#multiselect-container').multiselect('rebuild');
+		lang_span.remove();
+	});
+
+});

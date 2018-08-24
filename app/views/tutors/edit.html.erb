@@ -3,16 +3,29 @@
 		<div class="form-area mt-4">
 			<%= simple_form_for @tutor, url: tutor_path(id: current_user.id), method: :put, html: {multipart: true} do |f| %>
 					<h3>Your Tutor Profile</h3>
-					<%= f.input :full_name, label: 'Your Name' %>
-					<%= f.input :username %>
-					<%= f.input :occupation, label: 'Your Occcupation' %>
-					<%= f.input :city %>
-					<%= f.input :country %>
-	        <%= f.input :qualification %>
-					<%= f.input :specialization %>
+					<%= f.input :full_name, label: 'Your Name', placeholder: 'Your Name' %>
+					<%= f.input :username, placeholder: 'Username' %>
+					<%= f.input :occupation, label: 'Your Occcupation', placeholder: 'Occupation' %>
+					<%= f.input :city, placeholder: 'City' %>
+					<%= f.input :country, placeholder: 'Country' %>
+					<%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 100, end_year: Date.today.year %>
+					<%= f.input :gender, collection: User.genders, include_blank: false, placeholder: 'Gender' %>
+	        <%= f.input :qualification, placeholder: 'Qualification' %>
+					<%= f.input :specialization, placeholder: 'Specialization' %>
 					<%= f.label :languages %>
 					<%= f.association :languages, collection: @languages, label: false, input_html: { class: "multiselect-search form-control", multipe: "multipe" } %>
-					<%= f.input :about_me, as: :text, input_html: {rows: 3} %>
+					<label>Selected Languages</label>
+					<div class="selected-languages p-2">
+						<% f.object.languages.each do |language| %>
+							<span class="label label-info mr-1" data-langaugeid="<%= language.id %>">
+								<%= language.name %>
+								<button class="remove-lang" aria-label="Close" type="button" data-langid="<%= language.id %>" >
+									<span aria-hidden="true">×</span>
+        				</button>
+        			</span>
+						<% end %>
+					</div>
+					<%= f.input :about_me, as: :text, input_html: {rows: 3}, placeholder: 'Tell us about yourself' %>
 					<%= f.input :profile_pic, as: :file, label: "Your Profile Picture" %>
 					<div class="action mb-4 float-right">
 	        	<%= f.submit 'Update', class: 'btn btn-success' %>

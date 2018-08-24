@@ -17,7 +17,9 @@
 		</ul>
 		<div class="credits-info">
 			<span>Hello <%= current_user.username %>! you have earned <%= @credits.present? ? @credits : 0 %> credits.</span>
-			<%= link_to 'Buy Credits', credits_path, class: 'btn btn-sm btn-info' %>
+			<% if current_user.role == 0 %>
+				<%= link_to 'Buy Credits', credits_path, class: 'btn btn-sm btn-info' %>
+			<% end %>
 		</div>
 	<% else %>
 		<ul class="nav navbar-nav pull-right">

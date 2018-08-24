@@ -4,12 +4,12 @@
 		<div class="form-area mt-4">
 			<%= simple_form_for @user, method: :put do |f| %>
 				<h3>Account Settings</h3>
-				<%= f.input :email, label: 'Email Address' %>
-				<%= f.input :full_name, label: 'Name' %>
+				<%= f.input :email, label: 'Email Address', placeholder: 'Email Address' %>
+				<%= f.input :full_name, label: 'Name', placeholder: 'Full Name' %>
         <div class="password-area mt-2 mb-2">
-	        <%= f.input :current_password %>
-					<%= f.input :password, autocomplete: "new-password", label: "Password <em>(6 characters minimum)</em>".html_safe %>
-	        <%= f.input :password_confirmation, autocomplete: "new-password" %>
+	        <%= f.input :current_password, placeholder: 'Current Password' %>
+					<%= f.input :password, autocomplete: "new-password", label: "Password <em>(6 characters minimum)</em>".html_safe, placeholder: 'Password' %>
+	        <%= f.input :password_confirmation, autocomplete: "new-password", placeholder: 'Password Confirmation' %>
         </div>
 
         <div class="action mb-4">

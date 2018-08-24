@@ -42,7 +42,7 @@ class PackagesDatatable
     
     @packages = @packages.page(page).per_page(per_page)
     if params[:search][:value].present? and params[:search][:value] != ''
-      @packages = @packages.where("name like :search", search: "%#{params[:search]}%")
+      @packages = @packages.where("lower(name) like :search", search: "%#{params[:search][:value]}%")
     end
     @packages
   end

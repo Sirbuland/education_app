@@ -7,7 +7,8 @@ class User < ApplicationRecord
   has_and_belongs_to_many :languages
   accepts_nested_attributes_for :languages
 
-  has_many :packages
+  has_many :purchased_packages
+  has_many :packages, through: :purchased_packages
 
   mount_uploader :profile_pic, ProfilePictureUploader
 

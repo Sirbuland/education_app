@@ -9,6 +9,8 @@ Language.destroy_all
 I18nData.languages.values.each do |language|
 	Language.create name: language
 end
+american_english = Language.create(name: 'English (American)')
+british_english = Language.create(name: 'English (British)')
 
 # create super admin of application
 super_admin = User.find_or_create_by(email: 'admin@test.com')

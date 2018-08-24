@@ -1,15 +1,15 @@
 <div class="col-4 p-5">
-	<div class="card">
+	<div class="card" data-cardid="<%= package.id %>">
 		<div class="text-center p-4 card-header">
 			<h5 class="text-capitalize mt-2">
 				<%= package.name %>
 			</h5>
-			$<h3 class="d-inline-block"><b><%= package.price %></b></h3>
+			$<h3 class="d-inline-block"><b><%= package.price.to_i %></b></h3>
 		</div>
 		<div class="card-area pl-3 pr-3">
 			<p class="first-p">
 				<span>
-					<%= package.total_number_of_characters %>
+					<%= package.total_number_of_characters.to_i %>
 				</span>
 				<small>
 					characters
@@ -18,7 +18,7 @@
 			<hr/>
 			<p>
 				<span>
-					<%= package.total_credits %>
+					<%= package.total_credits.to_i %>
 				</span>
 				<small>
 					credits

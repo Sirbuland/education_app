@@ -2,6 +2,10 @@ body {
   overflow-x: hidden;
 }
 
+.navbar {
+  padding-bottom: 30px !important;
+}
+
 .heading {
   display: inline-block;
     overflow: hidden;
@@ -81,6 +85,7 @@ body {
   line-height: 1.32857143;
   background-color: #fff;
   border-radius: 0;
+  cursor: pointer;
   -webkit-transition: border .2s ease-in-out;
   transition: border .2s ease-in-out;
     -webkit-box-shadow: 0 4px 6px -6px black;
@@ -100,5 +105,15 @@ body {
 .card-area{
  p:first-child {
     margin-top: 1rem !important;
+  }
+}
+
+.credits-info{
+  position: absolute;
+  top: 60%;
+  left: 1.5%;
+  color: #ff6379;
+  .btn-sm {
+    line-height: 1.0;
   }
 }

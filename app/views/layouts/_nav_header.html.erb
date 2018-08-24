@@ -15,6 +15,10 @@
 				<%= link_to 'Logout', destroy_user_session_path, class: "nav-link" %>
 			</li>
 		</ul>
+		<div class="credits-info">
+			<span>Hello <%= current_user.username %>! you have earned <%= @credits.present? ? @credits : 0 %> credits.</span>
+			<%= link_to 'Buy Credits', credits_path, class: 'btn btn-sm btn-info' %>
+		</div>
 	<% else %>
 		<ul class="nav navbar-nav pull-right">
 			<li>

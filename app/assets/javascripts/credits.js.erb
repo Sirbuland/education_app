@@ -1,0 +1,15 @@
+$(document).ready(function () {
+	$('.card').click(function() {
+		var credit_id = $(this).data('cardid');
+		var request_url = "/credits/"+credit_id
+		$.ajax({
+			url: request_url,
+			type: 'GET',
+			dataType: 'html',
+			success: function(result){
+        $(".modal-area").html(result);
+        $(".package-item-modal").modal('toggle');
+    	}
+  	});		
+	});
+});

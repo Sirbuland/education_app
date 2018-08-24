@@ -17,3 +17,4 @@
 //= require bootstrap-multiselect
 //= require datatables
 //= require home
+//= require credits

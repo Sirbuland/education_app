@@ -24,9 +24,7 @@ class PackagesDatatable
         package.total_number_of_characters,
         package.total_credits,
         package.bonus,
-        package.created_at.strftime("%B %e, %Y"),
-        "<a href='#{edit_package_path(id: package.id)}' class='mr-1'>Edit</a>".html_safe,
-        "<a href='#{package_path(id: package.id)}' data-method='delete' class='mr-1'>Delete</a>".html_safe,
+        package.created_at.strftime("%B %e, %Y")
       ]
     end
   end

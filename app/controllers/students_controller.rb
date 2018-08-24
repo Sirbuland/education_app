@@ -28,6 +28,7 @@ class StudentsController < ApplicationController
   		:occupation,
   		:city,
   		:country,
+      :native_language,
   		:date_of_birth,
   		:gender,
   		:profile_pic

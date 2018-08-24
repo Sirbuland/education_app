@@ -5,7 +5,7 @@
         <%= link_to 'Personal Information', edit_student_path(id: current_user.id) %>
       </li>
       <li class="<%= activated_class('users', 'edit') %>">
-        <%= link_to 'Accounts Settings', edit_user_path(current_user) %>
+        <%= link_to 'Account Settings', edit_user_path(current_user) %>
       </li>
       <li class="<%= activated_class('packages', 'index') %>">
         <%= link_to 'Purchased Packages', packages_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180822140758) do
+ActiveRecord::Schema.define(version: 20180824025657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,14 +31,23 @@ ActiveRecord::Schema.define(version: 20180822140758) do
 
   create_table "packages", force: :cascade do |t|
     t.string "name"
-    t.float "price"
-    t.float "total_number_of_characters"
-    t.float "total_credits"
-    t.string "bonus"
+    t.integer "price"
+    t.integer "total_number_of_characters"
+    t.integer "total_credits"
+    t.integer "bonus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_packages_on_user_id"
+  end
+
+  create_table "purchased_packages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "package_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["package_id"], name: "index_purchased_packages_on_package_id"
+    t.index ["user_id"], name: "index_purchased_packages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,10 +72,13 @@ ActiveRecord::Schema.define(version: 20180822140758) do
     t.string "qualification"
     t.string "specialization"
     t.text "about_me"
+    t.integer "native_language"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "languages", "users"
   add_foreign_key "packages", "users"
+  add_foreign_key "purchased_packages", "packages"
+  add_foreign_key "purchased_packages", "users"
 end

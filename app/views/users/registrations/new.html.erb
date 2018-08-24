@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="col-12 offset-3">
     <div class="form-area">
-      <% if params[:user] == 'tutor' %>
+      <% if params[:userType] == 'tutor' %>
         <h3 class="text-capitalize">Sign up to become a tutor</h3>
       <% else %>
         <h3>Fill your info</h3>
@@ -9,25 +9,25 @@
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
-        <% if params[:user].present? %>
+        <% if params[:userType].present? %>
           <%= hidden_field_tag :user_type, 'Tutor' %>
         <% end %>
 
-        <%= f.input :username %>
-        <%= f.input :full_name %>
-        <%= f.input :email, autofocus: true, autocomplete: "email" %>
-        <% if params[:user] == 'tutor' %>
-          <%= f.input :city %>
-          <%= f.input :country %>
+        <%= f.input :username, placeholder: 'Username' %>
+        <%= f.input :full_name, placeholder: 'Your name', label: 'name' %>
+        <%= f.input :email, autofocus: true, autocomplete: "email", placeholder: 'Email' %>
+        <% if params[:userType] == 'tutor' %>
+          <%= f.input :city, placeholder: 'Select your city' %>
+          <%= f.input :country, prompt: 'Select your country' %>
           <%= f.label :languages %>
           <%= f.association :languages, collection: Language.order(:name), include_blank: false, label: false, input_html: { class: "multiselect-search form-control", multipe: "multipe" } %>
-          <%= f.input :qualification %>
-          <%= f.input :occupation %>
+          <%= f.input :qualification, placeholder: 'Your Education Background/Your Experience' %>
+          <%= f.input :occupation, placeholder: 'For Example: Creative Writing, Engineering' %>
         <% end %>
 
-        <%= f.input :password, autocomplete: "new-password", label: "Password <em>(6 characters minimum)</em>".html_safe %>
+        <%= f.input :password, autocomplete: "new-password", label: "Password <em>(6 characters minimum)</em>".html_safe, placeholder: 'Password' %>
 
-        <%= f.input :password_confirmation, autocomplete: "new-password" %>
+        <%= f.input :password_confirmation, autocomplete: "new-password", placeholder: 'Confirm your password' %>
 
         <div class="actions">
           <%= f.submit "Sign up", class: "btn btn-success" %>

@@ -22,7 +22,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       save_languages params[:user][:language_ids], resource if params[:user_type].present?
       if resource.active_for_authentication?
-        respond_with resource, location: after_sign_up_path_for(resource)
+        if resource.role == 0
+          sign_in resource_name, resource
+          return redirect_to after_sign_in_path_for(resource)
+        else
+          respond_with resource, location: after_sign_up_path_for(resource)
+        end
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
@@ -76,9 +81,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def save_languages languages, resource
-    resource.languages.destroy_all
-    languages.each do |language|
-      resource.languages.find_or_create_by(name: language) if language.present?
+    if resource.role == 1 and params[:language_ids].present?
+      resource.languages.destroy_all
+      languages.each do |language|
+        resource.languages.find_or_create_by(name: language) if language.present?
+      end
     end
   end
 

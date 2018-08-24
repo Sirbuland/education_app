@@ -6,14 +6,12 @@
 					<%= f.input :full_name, label: 'Your Name', placeholder: 'Your Name' %>
 					<%= f.input :username, placeholder: 'Username' %>
 					<%= f.input :occupation, label: 'Your Occcupation', placeholder: 'Occupation' %>
-					<%= f.input :city, placeholder: 'City' %>
-					<%= f.input :country, placeholder: 'Country' %>
-					<%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 100, end_year: Date.today.year %>
-					<%= f.input :gender, collection: User.genders, include_blank: false, placeholder: 'Gender' %>
-	        <%= f.input :qualification, placeholder: 'Qualification' %>
-					<%= f.input :specialization, placeholder: 'Specialization' %>
+					<%= f.input :city, placeholder: 'Select your city' %>
+					<%= f.input :country, placeholder: 'Country', prompt: 'Select your country' %>
+	        <%= f.input :qualification, placeholder: 'Your Education Background/Your Experience' %>
+					<%= f.input :specialization, placeholder: 'For Example: Creative Writing, Engineering' %>
 					<%= f.label :languages %>
-					<%= f.association :languages, collection: @languages, label: false, input_html: { class: "multiselect-search form-control", multipe: "multipe" } %>
+					<%= f.association :languages, collection: @languages, label: false, prompt: 'Select Language', input_html: { class: "multiselect-search form-control", multipe: "multipe" } %>
 					<label>Selected Languages</label>
 					<div class="selected-languages p-2">
 						<% f.object.languages.each do |language| %>

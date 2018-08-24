@@ -16,8 +16,9 @@ class Users::SessionsController < Devise::SessionsController
       return redirect_back fallback_location: root_path
     end
     if !@user.activated and @user.role == 1
+      sign_out @user
       flash[:alert] = "You are registered as tutor. Your profile is still waiting for approval."
-      return redirect_back fallback_location: root_path
+      return redirect_to root_path
     end
     self.resource = warden.authenticate!(auth_options)
     set_flash_message!(:notice, :signed_in)

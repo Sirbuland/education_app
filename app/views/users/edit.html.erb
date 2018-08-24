@@ -6,6 +6,10 @@
 				<h3>Account Settings</h3>
 				<%= f.input :email, label: 'Email Address', placeholder: 'Email Address' %>
 				<%= f.input :full_name, label: 'Name', placeholder: 'Full Name' %>
+				<% if f.object.role == 1 %>
+					<%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 100, end_year: Date.today.year %>
+					<%= f.input :gender, collection: User.genders, include_blank: false, placeholder: 'Gender' %>
+				<% end %>
         <div class="password-area mt-2 mb-2">
 	        <%= f.input :current_password, placeholder: 'Current Password' %>
 					<%= f.input :password, autocomplete: "new-password", label: "Password <em>(6 characters minimum)</em>".html_safe, placeholder: 'Password' %>

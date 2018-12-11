@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   resources :pending_applications, only: [:index, :update]
   resources :packages
   resources :credits
+  resources :tags
+  resources :categories
 
 end

@@ -1,0 +1,5 @@
+class CategoryTeacher < ApplicationRecord
+	
+	
+	
+end

@@ -41,6 +41,31 @@ $(document).ready(function() {
     ],
     sAjaxSource: $('#products').data('source')
   })
+$('#categories-table').dataTable({
+    sPaginationType: "full_numbers",
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    aoColumnDefs: [
+      { "targets": [0], "searchable": true, "orderable": false, "visible": true, name: 'name' },
+      { "targets": [1], "searchable": true, "orderable": false, "visible": true, name: 'price' },
+      { "targets": [2], "searchable": true, "orderable": false, "visible": true, name: 'created_at' }
+    ],
+    sAjaxSource: $('#products').data('source')
+  })
+
+$('#tags-table').dataTable({
+    sPaginationType: "full_numbers",
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    aoColumnDefs: [
+      { "targets": [0], "searchable": true, "orderable": false, "visible": true, name: 'name' },
+      { "targets": [1], "searchable": true, "orderable": false, "visible": true, name: 'price' },
+      { "targets": [2], "searchable": true, "orderable": false, "visible": true, name: 'created_at' }
+    ],
+    sAjaxSource: $('#products').data('source')
+  })
 
 // 'bJQueryUI': true,
 //     "processing": false,

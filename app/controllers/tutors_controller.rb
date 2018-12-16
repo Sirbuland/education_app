@@ -26,7 +26,8 @@ class TutorsController < ApplicationController
      render'editpost'
     end
   end
-  
+  # TODO: indent code properly and remove not required/commented code
+
   def update
   	if @tutor.update_without_password(user_params)
   		save_languages params[:user][:language_ids]
@@ -69,5 +70,6 @@ class TutorsController < ApplicationController
   def post_params
     params.require(:post).permit(:edited_text,:tutor_id,:status)
    end
+   # TODO: indent code properly and remove not required/commented code
     
 end

@@ -1,6 +1,15 @@
 <nav id="sidebar">
   <ul class="list-unstyled components">
     <% if current_user.role == 0 %>
+      <li class="<%= activated_class('posts', 'new') %>">
+        <%= link_to 'Add Posts', new_post_path %>
+      </li>
+      <li class="<%= activated_class('posts', 'active') %>">
+        <%= link_to 'Active Posts', active_path %>
+      </li>
+      <li class="<%= activated_class('posts', 'history') %>">
+        <%= link_to 'Posts History', history_path %>
+      </li>
       <li class="<%= activated_class('students', 'edit') %>">
         <%= link_to 'Personal Information', edit_student_path(id: current_user.id) %>
       </li>
@@ -17,6 +26,9 @@
       <li class="<%= activated_class('tutors', 'edit') %>">
         <%= link_to 'Tutor Profile', edit_tutor_path(id: current_user.id) %>
       </li>
+      <li class="<%= activated_class('tutors', 'pending') %>">
+        <%= link_to 'Pending Posts', pending_path(id: current_user.id) %>
+      </li>
       <li class="<%= activated_class('users', 'edit') %>">
         <%= link_to 'Accounts Settings', edit_user_path(current_user) %>
       </li>
@@ -30,10 +42,13 @@
       <li class="<%= activated_class('packages', 'index') %>">
         <%= link_to 'All Packages', packages_path %>
       </li>
-      <li class="<%= activated_class('packages', 'index') %>">
+      <li class="<%= activated_class('admin', 'declinedapplication') %>">
+        <%= link_to 'Declined Applications', declinedapplication_path %>
+      </li>
+      <li class="<%= activated_class('categories', 'index') %>">
         <%= link_to 'Categories', categories_path %>
       </li>
-      <li class="<%= activated_class('packages', 'index') %>">
+      <li class="<%= activated_class('tags', 'index') %>">
         <%= link_to 'Tags', tags_path %>
       </li>
     <% end %>

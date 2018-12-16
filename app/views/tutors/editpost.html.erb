@@ -1,0 +1,22 @@
+<br>
+<h1 align="center">Edit this Post</h1><hr>
+<div class="container">
+  <div class="row" >
+   <div class=" col-md-offset-0 col-md-12 ">
+    <%= render'posts/froala' %>
+    <div class="col-md-8 col-md-offset-0 epost ">
+     <div class="container ">
+      <%= simple_form_for @post, url: updatepost_path(:id => @post.id), method: :post, html: {multipart: true} do |f| %>
+      <%= f.text_area :edited_text, columns: 10, rows: 6, class: "form-control", value: f.object.original_text%><br>
+      <div class="form-group">
+       <div class="col-md-offset-5 col-md-12">
+        <%= f.submit class: "btn btn-primary btn-lg btn-xlg btnnew" %>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  <% end %>
+ </div>
+</div>
+

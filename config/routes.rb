@@ -19,5 +19,13 @@ Rails.application.routes.draw do
   resources :credits
   resources :tags
   resources :categories
-
+  resources :posts 
+  get '/history', to: 'posts#history'
+  get '/active', to: 'posts#active'
+  post '/acceptapp', to: 'posts#acceptapp'
+  post '/declineapp', to: 'posts#declineapp'
+  get '/pending', to: 'tutors#pending'
+  get '/editpost', to: 'tutors#editpost'
+  post '/updatepost', to: 'tutors#updatepost'
+  get '/declinedapplication', to: 'admin#declinedapplication'
 end

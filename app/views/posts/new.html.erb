@@ -1,0 +1,38 @@
+<br><h1 align="center">Add new Post</h1>
+<hr>
+<div class="container" >
+  <%= render'shared/error', obj:@post %>
+ <div class="row" >
+  <div class="col-md-offset-0 col-md-12 " >
+   <div class="container center epost">
+    <h3>Add your text here</h3>
+    <%= render'posts/froala' %>
+    <div class="col-md-12 offset-0 ">
+     <div class="form-area mt-4">
+      <%= simple_form_for @post, url: posts_path(id: current_user.id), method: :post, html: {multipart: true} do |f| %>
+      <%= f.text_area :original_text, rows: 6, class: "form-control", placeholder: "Add Post here"%>
+      <%= f.input :category_id, collection: Category.all, label_method: :name, value_method: :id, placeholder: 'Category'%>
+      <%= f.input :language_id, collection: Language.all, label_method: :name, umar: :id, placeholder: 'Language'%>
+      <%= f.association :tags, collection: Tag.all, label: false, prompt: 'Tags', input_html: { class: "multiselect-search form-control", multipe: "multipe" } %>
+      <label>Selected Tags</label>
+      <div class="selected-languages p-2">
+        <% f.object.tags.each do |tag| %>
+        <span class="label label-info mr-1" data-tagid="<%= tag.id %>">
+          <%= tag.name %>
+          <button class="remove-lang" aria-label="Close" type="button" data-tagid="<%= tag.id %>" >
+            <span aria-hidden="true">×</span>
+          </button>
+        </span>
+       <% end %>
+      </div>
+      <div class="form-group pull-right">
+       <div class=" col-md-13 ">
+        <%= f.submit class: "btn btn-primary btn-lg btn-xlg btnnew" %>
+       </div>
+      </div>
+     </div>
+    </div>
+   <% end %>
+  </div>
+ </div></div>
+</div>

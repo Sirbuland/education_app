@@ -19,3 +19,7 @@
 //= require home
 //= require credits
 //= require select_languages
+//= require froala_editor.min
+
+
+$('.froala_text').froalaEditor();	

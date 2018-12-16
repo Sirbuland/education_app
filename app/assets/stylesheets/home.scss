@@ -11,9 +11,92 @@ body {
     overflow: hidden;
     width: 100%;
 }
+.editpost {
+  margin-bottom: 0 px;
+  padding: 10px;
+    
+}
+.org_text {
+  background-color: #F3ECEC;
+  width: 100%;
+  border: 25px;
+  padding: 5px;
+  margin: 5px;
+}
 .page-content {
   width: 80%;
   vertical-align: top;
+}
+.buttonAcc{
+   background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 6px 25px;
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+}
+.post{
+  margin: 40px;
+  padding:20px;
+  border-bottom: 6px solid red;
+  background-color: lightgrey;
+  display: inline-block;
+}
+.cpost{
+  margin: 40px;
+  padding:20px;
+  border-bottom: 6px solid red;
+  padding-left: 70px;
+  display: inline-block;
+}
+.epost{
+  padding-top: 30px;
+  padding-left: 70px;
+  margin: 40px;
+  border-bottom: 6px solid red;
+  background-color: lightgrey;
+  display: inline-block;
+  padding-bottom: 20px;
+}
+.buttonEdit{
+   background-color: #FFBA01;
+  border: none;
+  color: white;
+  padding: 6px 25px;
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+}
+.buttonDec{
+   background-color: red;
+  border: none;
+  color: white;
+  padding: 6px 25px;
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+}
+.pag {
+  margin: auto;
+  width: 50%;
+  
+  padding: 10px;
 }
 
 .page-content,
@@ -116,6 +199,16 @@ body {
   .btn-sm {
     line-height: 1.0;
   }
+}
+.btnnew{
+  
+  float:right;
+  margin-top: 15px;
+}
+.froala{
+  
+  float:left;
+  margin-left: 30px;
 }
 
 .selected-languages {

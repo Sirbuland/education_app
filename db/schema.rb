@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181211112636) do
+ActiveRecord::Schema.define(version: 20181214123246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,12 +25,6 @@ ActiveRecord::Schema.define(version: 20181211112636) do
   create_table "category_teachers", force: :cascade do |t|
     t.integer "category_id"
     t.integer "teacher_id"
-  end
-
-  create_table "chats", force: :cascade do |t|
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "languages", force: :cascade do |t|
@@ -59,6 +53,23 @@ ActiveRecord::Schema.define(version: 20181211112636) do
     t.index ["user_id"], name: "index_packages_on_user_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.text "original_text"
+    t.text "edited_text"
+    t.integer "status"
+    t.integer "student_id"
+    t.integer "tutor_id"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "application"
+    t.integer "language_id"
+    t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["language_id"], name: "index_posts_on_language_id"
+    t.index ["student_id"], name: "index_posts_on_student_id"
+    t.index ["tutor_id"], name: "index_posts_on_tutor_id"
+  end
+
   create_table "purchased_packages", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "package_id"
@@ -66,6 +77,11 @@ ActiveRecord::Schema.define(version: 20181211112636) do
     t.datetime "updated_at", null: false
     t.index ["package_id"], name: "index_purchased_packages_on_package_id"
     t.index ["user_id"], name: "index_purchased_packages_on_user_id"
+  end
+
+  create_table "tag_posts", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "post_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -98,6 +114,8 @@ ActiveRecord::Schema.define(version: 20181211112636) do
     t.string "specialization"
     t.text "about_me"
     t.integer "native_language"
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_users_on_category_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

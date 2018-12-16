@@ -48,7 +48,7 @@ $('#categories-table').dataTable({
     bServerSide: true,
     aoColumnDefs: [
       { "targets": [0], "searchable": true, "orderable": false, "visible": true, name: 'name' },
-      { "targets": [1], "searchable": true, "orderable": false, "visible": true, name: 'price' },
+      { "targets": [1], "searchable": true, "orderable": false, "visible": true, name: 'description' },
       { "targets": [2], "searchable": true, "orderable": false, "visible": true, name: 'created_at' }
     ],
     sAjaxSource: $('#products').data('source')
@@ -61,7 +61,7 @@ $('#tags-table').dataTable({
     bServerSide: true,
     aoColumnDefs: [
       { "targets": [0], "searchable": true, "orderable": false, "visible": true, name: 'name' },
-      { "targets": [1], "searchable": true, "orderable": false, "visible": true, name: 'price' },
+      { "targets": [1], "searchable": true, "orderable": false, "visible": true, name: 'description' },
       { "targets": [2], "searchable": true, "orderable": false, "visible": true, name: 'created_at' }
     ],
     sAjaxSource: $('#products').data('source')

@@ -1,5 +1,0 @@
-class CategoryTeacher < ApplicationRecord
-	
-	
-	
-end

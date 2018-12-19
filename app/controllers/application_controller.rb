@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 			])
   end
 
-  private
+private
 
   def is_student?
     current_user.role == 0

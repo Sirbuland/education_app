@@ -1,18 +1,19 @@
-<br><h1 align="center">Add new Post</h1>
-<hr>
-<div class="container" >
+<br><h1 align="center">Add new Post</h1><hr>
+<div class="container">
   <%= render'shared/error', obj:@post %>
- <div class="row" >
-  <div class="col-md-offset-0 col-md-12 " >
+ <div class="row">
+  <div class="col-md-offset-0 col-md-12 ">
    <div class="container center epost">
     <h3>Add your text here</h3>
     <%= render'posts/froala' %>
-    <div class="col-md-12 offset-0 ">
+    <div class="col-md-12 offset-0">
      <div class="form-area mt-4">
       <%= simple_form_for @post, url: posts_path(id: current_user.id), method: :post, html: {multipart: true} do |f| %>
-      <%= f.text_area :original_text, rows: 6, class: "form-control", placeholder: "Add Post here"%>
+      <%= f.text_area :original_text, maxlength: @maximum_length,rows: 6, class: "form-control",id:'original_text', placeholder: "Add Post here"%>
+      <small class="pull-right">Chars : <span id="counter" data-maximum-length="<%= @maximum_length %>"></span>/<%= @maximum_length %></small><br>
+      <p><%="Credit".pluralize(0) %> <span id="char-count">0</span></p>
       <%= f.input :category_id, collection: Category.all, label_method: :name, value_method: :id, placeholder: 'Category'%>
-      <%= f.input :language_id, collection: Language.all, label_method: :name, umar: :id, placeholder: 'Language'%>
+      <%= f.input :language_id, collection: Language.all, label_method: :name, value_method: :id, placeholder: 'Language'%>
       <%= f.association :tags, collection: Tag.all, label: false, prompt: 'Tags', input_html: { class: "multiselect-search form-control", multipe: "multipe" } %>
       <label>Selected Tags</label>
       <div class="selected-languages p-2">
@@ -35,4 +36,4 @@
    <% end %>
   </div>
  </div></div>
-</div>
+</divS>

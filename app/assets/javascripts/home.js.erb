@@ -26,6 +26,8 @@ $(document).ready(function() {
     sAjaxSource: $('#products').data('source')
   })
 
+  
+
   $('#packages-table').dataTable({
     sPaginationType: "full_numbers",
     bJQueryUI: true,
@@ -66,6 +68,26 @@ $('#tags-table').dataTable({
     ],
     sAjaxSource: $('#products').data('source')
   })
+
+ $(document).ready(function() {
+         var original_text = $("#original_text");
+         var counter     = $("#counter");
+         var max_length  = counter.data("maximum-length");
+         counter.text(original_text.val().length);
+         original_text.keyup(function() {
+          counter.text($(this).val().length);
+        });
+       });
+
+  $(document).ready(function() {
+    $('#char-count').html($('#original_text').val().length);
+     
+  });
+ 
+  $('#original_text').keyup(function() {
+    $('#char-count').html(Math.floor(($(this).val().length/70)))
+   
+  });
 
 // 'bJQueryUI': true,
 //     "processing": false,

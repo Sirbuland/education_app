@@ -38,8 +38,8 @@ gem 'bootstrap-multiselect-rails'
 gem 'i18n_data'
 gem 'jquery-datatables'
 gem 'ajax-datatables-rails'
-gem 'will_paginate'
-
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+gem 'will_paginate-bootstrap4'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

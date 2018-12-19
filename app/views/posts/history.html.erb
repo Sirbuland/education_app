@@ -1,30 +1,30 @@
 <br>
-<h1 align="center"> Posts History</h1>
-<hr>
+<h1 align="center"> Posts History</h1><hr>
 <div class ="container">
  <div class="row">
-  <div class = "well col-md-10 col-md-offset-6 ">
+  <div class = "well col-md-12 col-md-offset-6 ">
    <% @posts.each do |post|%>
     <% if post.student_id == current_user.id%>
 	   <% if post.status == "Closed"%>
 	    <div class ="container post">
-	     <div class = "pull-right post_status"><small>Post Status:</small> <small style = "color: red;"><%= post.status%> </small></div>
-			 <div class = "pull-left post_status"><small> Created <%= time_ago_in_words(post.created_at)%> ago. ||&nbsp;</small></div>
-		   <div class = "pull-left post_status"><small>Edited <%= time_ago_in_words(post.updated_at)%> ago. By <%= post.tutor.full_name%> </small></div><br>
+	     <div class = "pull-right post_status"><small>Post Status:</small> <small style = "color: red;"><%= post.status%>  </small></div>
+			 <div class = "pull-left post_status"><small> Created <%= post.created_at.strftime("%d/%m/%Y on %I:%M:%S")%> 
+			   </small></div><br>
 			 <div class = "org_text"><p class =" center original_text"><%= simple_format(post.original_text)%></p></div><br>
-	     <h5 class ="pull-left"> Edited Text: &nbsp; &nbsp;</h5> <br>
-	     <div class = "org_text"><p class =" center original_text"><%= simple_format(post.edited_text)%></p></div>
-			 <div class="row">
-			   <small>&nbsp;&nbsp;Category:</small><h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
-			   	&nbsp;</h4>
-			   <small>Language:</small><h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.language.name%></h4></div><br><br>
-			 <% post.tags.each do |pos|%>
-			 <h5 class ="pull-left"  style="color:#B1A7A7;"> <%= pos.name%> &nbsp; &nbsp;</h5>
-			 <%end%><br><hr>
+	     <div class="row">
+			  &nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
+			    &nbsp;</h4>
+			  Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.language.name%></h4></div><br><br>
+			  <% post.tags.each do |pos|%>
+			   <h5 class ="pull-left"  style="color:#B1A7A7;"> <%= pos.name%> &nbsp; &nbsp;</h5>
+			  <%end%><br><br>
+			  <h5 class ="pull-left"> Edited Text: &nbsp; &nbsp;</h5> <br>
+	      <div class = "org_text"><p class =" center original_text"><%= simple_format(post.edited_text)%></p></div>
+		    <div class = "pull-left post_status"><small>Edited <%= post.updated_at.strftime("%d/%m/%Y on %I:%M:%S")%>. By <%= post.tutor.full_name%> </small></div>
       </div>
-	  <%end%>
-   <%end%>	
-	<%end%>	
+	   <%end%>
+    <%end%>	
+	 <%end%>
+  </div>
  </div>
-</div></div> 
 </div>

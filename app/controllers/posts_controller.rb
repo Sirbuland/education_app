@@ -78,7 +78,6 @@ before_action :set_post, only:[:edit, :update ]
    def declineapp
      @post= Post.find(params[:id])
      @post.update_attributes(:status => "SubmittedToAdmin", :application => false) 
-     flash[:success] = "Post edited successfully"
      redirect_to active_path
    end 
    

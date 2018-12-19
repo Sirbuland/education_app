@@ -17,7 +17,7 @@
 			  <h5 class ="pull-left"  style="color:#B1A7A7;"> <%= pos.name%> &nbsp; &nbsp;</h5>
 			 <%end%><br><br>
 			 <h5 class ="pull-left"> Edited Text: &nbsp; &nbsp;</h5> <br>
-	     <div class = "org_text"><p class =" center original_text"><%= simple_format(post.edited_text.strftime("%d/%m/%Y on %I:%M:%S"))%></p></div> <br>
+	     <div class = "org_text"><p class =" center original_text"><%= simple_format(post.edited_text)%></p></div> <br>
 			 <div class = "pull-left post_status"><small>Edited at <%= post.updated_at.strftime("%d/%m/%Y on %I:%M:%S")%> By <%= post.tutor.full_name%> </small></div><br>
       </div>
 	   <%end%>	

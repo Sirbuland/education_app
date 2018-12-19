@@ -4,7 +4,7 @@
  <div class="row" >
   <div class=" col-md-offset-0 col-md-12 ">
    <%= render'posts/froala' %>
-   <div class="col-md-11 col-md-offset-0 epost ">
+   <div class="col-md-12 col-md-offset-0 epost ">
     <div class="container ">
      <%= simple_form_for @post, url: updatepost_path(:id => @post.id), method: :post, html: {multipart: true} do |f| %>
       <h5 class ="pull-left"> Original Text: &nbsp; &nbsp;</h5> <br>

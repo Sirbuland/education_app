@@ -16,9 +16,16 @@
 			</li>
 		</ul>
 		<div class="credits-info">
-			<span>Hello <%= current_user.username %>! you have earned <%= @credits.present? ? @credits : 0 %> credits.</span>
 			<% if current_user.role == 0 %>
+			<span>Hello <%= current_user.username %>! you have earned <%= @credits.present? ? @credits : 0 %> credits.</span>
 				<%= link_to 'Buy Credits', credits_path, class: 'btn btn-sm btn-info' %>
+			<% end %>
+			<% if current_user.super_admin%>
+			<span>Hello <%= current_user.username %>! you have earned <%= current_user.admin_credits.sum(:total_credits) %> credits.</span>
+			<% end %>
+			<% if current_user.role == 1 %>
+			<span>Hello <%= current_user.username %>! you have earned <%= current_user.availed_credits.sum(:total_credits) %> credits.</span>
+			
 			<% end %>
 		</div>
 	<% else %>

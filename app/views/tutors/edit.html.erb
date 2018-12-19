@@ -8,7 +8,7 @@
 					<%= f.input :occupation, label: 'Your Occcupation', placeholder: 'Occupation' %>
 					<%= f.input :city, placeholder: 'Select your city' %>
 					<%= f.input :country, placeholder: 'Country', prompt: 'Select your country' %>
-	        <%= f.input :qualification, placeholder: 'Your Education Background/Your Experience' %>
+	                <%= f.input :qualification, placeholder: 'Your Education Background/Your Experience' %>
 					<%= f.input :specialization, placeholder: 'For Example: Creative Writing, Engineering' %>
 					<%= f.label :languages %>
 					<%= f.association :languages, collection: @languages, label: false, prompt: 'Select Language', input_html: { class: "multiselect-search form-control", multipe: "multipe" } %>

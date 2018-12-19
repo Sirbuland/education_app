@@ -5,45 +5,50 @@ class TagsController < ApplicationController
 
 
 	def index
-      @tags_count = Tag.count
-  	  respond_to do |format|
+    @tags_count = Tag.count
+  	respond_to do |format|
 		  format.html
 		  format.json { render json: TagsDatatable.new(view_context) }
 		end
 	end
-	def show
-  	
+	
+  def show
   end	
+  
   def new 
 	 @tag = Tag.new
 	end
+  
   def create 
 	 @tag = Tag.new(tag_params)
-		if @tag.save
-		 flash[:save] = "Tag created successfully"
+	 if @tag.save
+		 flash[:success] = "Tag created successfully"
 		 redirect_to tags_path
-		else
-		 	render'new'
-		end
+	 else
+		 render'new'
+	 end
   end
-  def edit
   
+  def edit
   end
+  
   def update
-		if @tag.update(tag_params)
-		 flash[:save] = "Tag updated successfully"
+	 if @tag.update(tag_params)
+		 flash[:success] = "Tag updated successfully"
 		 redirect_to tag_path(@tag)
-		 else
-		 	render'edit'
-		 end
+	 else
+		 render'edit'
+	 end
 	end
+  
   def destroy
 	  @tag = Tag.find(params[:id]).destroy
-	  flash[:save] = "Tag deleted successfully"
+	  flash[:success] = "Tag deleted successfully"
 		redirect_to tags_path()
 	end
  
 private 
+
   def set_tag
     @tag = Tag.find(params[:id])
   end
@@ -51,10 +56,12 @@ private
 	def tag_params
 	  params.require(:tag).permit(:name,:description)
 	end
-	def validate_user
-	if !current_user.super_admin
+	
+  def validate_user
+	  if !current_user.super_admin
       redirect_to root_path
-  end 
+    end 
+  end
+
 end
-end
-# TODO: indent code properly and remove not required/commented code
+

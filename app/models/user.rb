@@ -4,15 +4,18 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  belongs_to :category, foreign_key: 'category_id', optional: true
+  
   has_and_belongs_to_many :languages
   accepts_nested_attributes_for :languages
 
   has_many :purchased_packages
   has_many :packages, through: :purchased_packages
-   
-  belongs_to :category, foreign_key: 'category_id', optional: true 
   has_many :created_posts, class_name: 'Post', foreign_key: 'student_id'
   has_many :edited_posts, class_name: 'Post', foreign_key: 'tutor_id'
+  has_many :used_credits, class_name:'Credit', foreign_key: 'student_id'
+  has_many :availed_credits, class_name:'Credit', foreign_key: 'tutor_id'
+  has_many :admin_credits, class_name:'Credit', foreign_key: 'admin_id'
 
   mount_uploader :profile_pic, ProfilePictureUploader
 

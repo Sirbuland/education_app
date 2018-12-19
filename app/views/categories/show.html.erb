@@ -4,7 +4,7 @@
 <div class = "well col-md-4 col-md-offset-2 ">
 	<h4 class =" center description"><%= simple_format(@tag.description)%></h4>
     <hr>
-	 <div class = "pull-right">Created <%= time_ago_in_words(@tag.created_at)%> ago.</div></p>
+	 <div class = "pull-right">Created <%= time_ago_in_words(@tag.created_at.strftime("%d/%m/%Y on %I:%M:%S"))%> ago.</div></p>
      <div class="category-actions">
 		<%= link_to "Edit this tag", edit_tag_path(@tag), class:"btn btn-xs btn-warning"%>  
 		<%= link_to "Delete this tag", tag_path(@tag), method: :delete ,

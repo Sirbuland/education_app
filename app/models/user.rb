@@ -11,11 +11,15 @@ class User < ApplicationRecord
 
   has_many :purchased_packages
   has_many :packages, through: :purchased_packages
+
   has_many :created_posts, class_name: 'Post', foreign_key: 'student_id'
-  has_many :edited_posts, class_name: 'Post', foreign_key: 'tutor_id'
   has_many :used_credits, class_name:'Credit', foreign_key: 'student_id'
+
   has_many :availed_credits, class_name:'Credit', foreign_key: 'tutor_id'
   has_many :admin_credits, class_name:'Credit', foreign_key: 'admin_id'
+
+  has_many :post_tutors
+  has_many :edited_posts, class_name: 'Post', through: :post_tutors
 
   mount_uploader :profile_pic, ProfilePictureUploader
 

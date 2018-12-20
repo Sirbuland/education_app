@@ -6,7 +6,8 @@ class AdminController < ApplicationController
   end
 
   def declinedapplication
-  	@post = Post.all
+  	   @post = Post.where(status: :SubmittedToAdmin).paginate(page: params[:page],per_page:2)
+
   end
 
 private

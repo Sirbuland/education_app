@@ -17,7 +17,8 @@
 		</ul>
 		<div class="credits-info">
 			<% if current_user.role == 0 %>
-			<span>Hello <%= current_user.username %>! you have earned <%= @credits.present? ? @credits : 0 %> credits.</span>
+			<% credit =  @credits - current_user.used_credits.sum(:total_credits) %>
+			<span>Hello <%= current_user.username %>! you have earned <%= credit  %> credits.</span>
 				<%= link_to 'Buy Credits', credits_path, class: 'btn btn-sm btn-info' %>
 			<% end %>
 			<% if current_user.super_admin%>
@@ -25,10 +26,9 @@
 			<% end %>
 			<% if current_user.role == 1 %>
 			<span>Hello <%= current_user.username %>! you have earned <%= current_user.availed_credits.sum(:total_credits) %> credits.</span>
-			
 			<% end %>
 		</div>
-	<% else %>
+	<% else   %>
 		<ul class="nav navbar-nav pull-right">
 			<li>
 				<%= link_to 'Login', new_user_session_path, class: 'btn btn-sm btn-primary' %>
@@ -36,5 +36,6 @@
 			<li>
 				<%= link_to 'Register', new_user_registration_path, class: 'btn btn-sm btn-primary ml-1' %>
 			</li>
+	  
 	<% end %>
 </nav>

@@ -14,12 +14,23 @@ class TutorsController < ApplicationController
   def editpost
     @post  = Post.find(params[:id])
   end
+ 
+  def declinepost
+   @post  = Post.find(params[:id])
+   @posttutor = PostTutor.find_by post_id: params[:id] 
+   @posttutor.tutor_id = current_user.id
+   @posttutor.flag = false
+    if @posttutor.save
+      redirect_back(fallback_location: pending_path)
+    end
+  end
 
   def updatepost
     @post = Post.find(params[:id])
     @post.status="Edited"
     @post.tutor_id= current_user.id
-
+    @posttutor = PostTutor.find_by post_id: params[:id] 
+    @posttutor.update_attribute(:tutor_id,current_user.id)
     if @post.update(post_params)
       #@credit.update_attribute(:tutor_id, current_user.id)
       flash[:success] = "Post edited successfully"

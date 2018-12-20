@@ -2,10 +2,18 @@ class PostsController < ApplicationController
 before_action :set_post, only:[:edit, :update ]
 
 	 def new 
-	   @post= Post.new 
-     #@maximum_length = Post.validators_on( :original_text ).first.options[:maximum]
-     @maximum_length =2100
-   end
+     @credits = current_user.packages.sum(:total_credits)
+     @credits += current_user.packages.sum(:bonus)
+     totalcred = current_user.used_credits.sum(:total_credits)
+     if @credits > totalcred  
+	     @post= Post.new 
+       #@maximum_length = Post.validators_on( :original_text ).first.options[:maximum]
+       @maximum_length =2100
+     else 
+       flash[:error] = "You dont have enough credits to create a post"
+       redirect_to credits_path
+    end
+  end
    
    def create 
     #Creating new Post
@@ -13,17 +21,20 @@ before_action :set_post, only:[:edit, :update ]
      @post.status="Pending"
      @post.application= "true"
      @post.student_id= current_user.id
+     @posttutor = PostTutor.new 
+     
+     
      #Creating new Credit with credits from text area directly
-     @credit = Credit.new
+     @credits = Credit.new
      ida = current_user.id
      @user = User.find(ida)
-     @credit.total_credits = @post.original_text.size/70.floor
-     @credit.post_id = @post.id
-     @credit.student_id = current_user.id
+     @credits.total_credits = (@post.original_text.size/70).floor
      
      if @post.save
-       @credit.post_id = @post.id
-       @user.used_credits << @credit
+       @credits.post_id = @post.id
+       @posttutor.post_id = @post.id
+       @posttutor.save
+       @credits.save
 		   flash[:success] = "Post created successfully"
 		   redirect_to active_path
 		 else
@@ -36,22 +47,28 @@ before_action :set_post, only:[:edit, :update ]
      ida = current_user.id
      @user = User.find(ida)
      usedcred = 0
+     @cred = Credit.find_by post_id: params[:id] 
+     @cred.update_attribute(:student_id,current_user.id)
+     
      
      #finding credits for respective user
+      
      @user.used_credits.each do |credit|
-       if credit.post_id == @post.id 
+        if credit.post_id == @post.id 
          usedcred = credit.total_credits
+       break
        end
      end
-     
+=begin     
      #finding user's Package
      @user.packages.each do |package|
-       if package.total_credits > 0 && package.total_credits > usedcred
+        if package.total_credits > 0 && package.total_credits > usedcred
           total=package.total_credits-usedcred
           package.update_attribute(:total_credits,total)
-       end
-     end  
-      
+         break
+        end
+      end  
+=end      
      #Tutor Credits
      tutid = @post.tutor_id
      @tutor = User.find(tutid)
@@ -82,12 +99,13 @@ before_action :set_post, only:[:edit, :update ]
    end 
    
    def history
-    @posts=Post.all 
-		#@posts = Post.paginate(page: params[:page], per_page: 2)
+    
+		@posts = @current_user.created_posts.where(status: :Closed).paginate(page: params[:page],per_page:2)
+  
 	 end
 	 
    def active 
-    @posts = Post.order("created_at").paginate(page: params[:page],per_page:2)
+    @posts = @current_user.created_posts.where.not(status: Post.statuses[:Closed]).paginate(page: params[:page],per_page:2)
 	 end
 	 
  private 

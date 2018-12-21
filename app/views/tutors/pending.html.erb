@@ -5,7 +5,7 @@
 	 <% @posts.each do |post|%>
 	 <% if post.status == "Pending" %>
 	 <% post.post_tutors.each do |posttutor|%>
-    <% if !posttutor.tutor_id.present? %>
+    <% if posttutor.flag == true && !posttutor.tutor_id.present? %>
     
      <div class="container post">
       <div class = "pull-right post_status"><small>Post Status:</small><small style = "color: green;"><%= post.status%>  </small></div>
@@ -15,12 +15,22 @@
 			  &nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
 			  &nbsp;</h4>
 			  Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.language.name%></h4></div><br><br>
-			<%post.tags.each do |pos|%>
-			 <h5 class ="pull-left"  style="color:#B1A7A7;"> <%= pos.name%> &nbsp; &nbsp;</h5>
-			<%end%><br>
+			<div class="selected-tags ">
+       <%post.tags.each do |pos|%>
+        <span class="label label-info" >
+          <%= pos.name %>
+          <button class="remove-lang" type="button" >
+          </button>
+        </span>
+       <% end %>
+      </div><br><br>
+			<div class = "pull-left post_status"><h5>You can earn 
+						<% post.credits.each do |credit|%>
+							 <%=  display_cedits credit.total_credits/2%>
+							 <% end %> 
+						</h5></div><br><br>
 			<div class="pull-right editpost">
-		        <%= button_to 'Decline', {:controller => "tutors", :action => "declinepost", :id => post.id},
-		          {:class => "buttonEdit" }%></div>
+		        <%= button_to 'Decline', {:controller => "tutors", :action => "declinepost", :id => post.id},{:class => "buttonDecline" }%></div>
 		          <div class="pull-right editpost" >
 				<%= link_to "Commit", editpost_path(:id => post.id),:class => "buttonEdit" %>
 			</div><br>
@@ -31,7 +41,7 @@
 
 
 
-    <% else if posttutor.tutor_id != current_user.id ||(posttutor.tutor_id == current_user.id && posttutor.flag == true)  %>
+    <% else if posttutor.tutor_id.present? && posttutor.tutor_id != current_user.id && posttutor.flag == false  %>
      <div class="container post">
       <div class = "pull-right post_status"><small>Post Status:</small><small style = "color: green;"><%= post.status%>  </small></div>
 			<div class = "pull-left post_status"><small> Created at <%= post.created_at.strftime("%d/%m/%Y on %I:%M:%S")%></small></div><br>
@@ -40,12 +50,23 @@
 			  &nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
 			  &nbsp;</h4>
 			  Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.language.name%></h4></div><br><br>
-			<%post.tags.each do |pos|%>
-			 <h5 class ="pull-left"  style="color:#B1A7A7;"> <%= pos.name%> &nbsp; &nbsp;</h5>
-			<%end%><br>
+			<div class="selected-tags ">
+       <%post.tags.each do |pos|%>
+        <span class="label label-info" >
+          <%= pos.name %>
+          <button class="remove-lang" type="button" >
+          </button>
+        </span>
+       <% end %>
+      </div><br><br>
+					<div class = "pull-left post_status"><h5>You can earn 
+						<% post.credits.each do |credit|%>
+							 <%= display_cedits credit.total_credits/2%>
+						<% end %> 
+						</h5></div><br><br>
 			<div class="pull-right editpost">
 		        <%= button_to 'Decline', {:controller => "tutors", :action => "declinepost", :id => post.id},
-		          {:class => "buttonEdit" }%></div>
+		          {:class => "buttonDecline" }%></div>
 		          <div class="pull-right editpost" >
 				<%= link_to "Commit", editpost_path(:id => post.id),:class => "buttonEdit" %>
 			</div><br>
@@ -58,4 +79,6 @@
   </div> 
  </div> 
 </div> 
+
+
 

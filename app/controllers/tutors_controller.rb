@@ -17,10 +17,14 @@ class TutorsController < ApplicationController
  
   def declinepost
    @post  = Post.find(params[:id])
-   @posttutor = PostTutor.find_by post_id: params[:id] 
-   @posttutor.tutor_id = current_user.id
-   @posttutor.flag = false
-    if @posttutor.save
+   @posttutor = PostTutor.find_by post_id: params[:id]
+   @posttutor.update_attribute(:flag,false)
+   @posttutor1 = PostTutor.new
+   @posttutor1.post_id = @post.id  
+   @posttutor1.tutor_id = current_user.id
+   @posttutor1.flag = false
+   
+    if @posttutor1.save
       redirect_back(fallback_location: pending_path)
     end
   end
@@ -30,7 +34,14 @@ class TutorsController < ApplicationController
     @post.status="Edited"
     @post.tutor_id= current_user.id
     @posttutor = PostTutor.find_by post_id: params[:id] 
-    @posttutor.update_attribute(:tutor_id,current_user.id)
+    @posttutor.update_attribute(:flag,false)
+    
+    @posttutor1 = PostTutor.new
+    @posttutor1.post_id = @post.id  
+    @posttutor1.tutor_id = current_user.id
+    @posttutor1.save
+
+
     if @post.update(post_params)
       #@credit.update_attribute(:tutor_id, current_user.id)
       flash[:success] = "Post edited successfully"
@@ -38,6 +49,10 @@ class TutorsController < ApplicationController
     else
       render'editpost'
     end
+  end
+
+  def postshistory
+   @posts = Post.all
   end
 
   def update

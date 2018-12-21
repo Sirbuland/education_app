@@ -1,12 +1,38 @@
 $(document).ready(function() {
+  var checked_items = [];
 	
 	// Setting of multiselect. Bootstrap multiselect gem is used
   $('.multiselect-search').multiselect({
     enableFiltering: true,
     maxHeight: 250,
     filterPlaceholder: 'Search for something...',
-    enableCaseInsensitiveFiltering: true
+    enableCaseInsensitiveFiltering: true,
+    onChange: function(element, checked) {
+      var element_text = element[0].text
+      if(checked) {
+        checked_items.push(element_text);
+      } 
+      else {
+        checked_items = checked_items.filter(function(value, index, arr){
+          return value != element_text;
+        });
+      }
+      create_tags(checked_items);
+    }
   });
+
+  function create_tags(items) {
+    $('.selected-tagg').html('')
+    var html = "";
+    
+    $.each(items, function(value, item){
+      
+      html += '<span class="label label-info mr-1">'+ item
+      html += '<button class="remove-lang" aria-label="Close" type="button" >'
+      html += '</button></span>'  
+    });
+    $('.selected-tagg').append(html);
+  }
 
   $('#pending-applications').dataTable({
     sPaginationType: "full_numbers",
@@ -80,14 +106,19 @@ $('#tags-table').dataTable({
        });
 
   $(document).ready(function() {
-    $('#char-count').html($('#original_text').val().length);
+   $('#char_count').html($('#original_text').val().length);
      
   });
  
   $('#original_text').keyup(function() {
-    $('#char-count').html(Math.floor(($(this).val().length/70)))
-   
+    $('#char_count').html(Math.floor(($(this).val().length/70)))
+    
   });
+
+
+
+
+
 
 // 'bJQueryUI': true,
 //     "processing": false,

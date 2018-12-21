@@ -1,0 +1,49 @@
+<% @posts.each do |post|%>
+ 			 <% post.post_tutors.each do |posttutor|%>
+ 			  <% if posttutor.tutor_id == current_user.id && posttutor.flag == false%>
+		      <div class = "well col-md-12 "> 
+ 			     <div class ="container post">
+   			     <div class = "pull-left post_status"><h2>Declined by you</h2></div><br><br>
+	 			     <div class = "pull-left post_status"><small> Created <%= post.created_at.strftime("%d/%m/%Y on %I:%M:%S")%></small></div><br>
+	 			     <div class = "org_text"><p class =" center original_text"><%= simple_format(post.original_text)%></p></div><br>
+   			     <div class="row">
+	  			     &nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>&nbsp;</h4>
+	  			     Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.language.name%></h4></div><br><br>
+	  		     <div class="selected-tags ">
+       <%post.tags.each do |pos|%>
+        <span class="label label-info" >
+          <%= pos.name %>
+          <button class="remove-lang" type="button" >
+          </button>
+        </span>
+       <% end %>
+      </div><br><br>
+	  	      </div>
+          </div>
+  	    <% else if posttutor.tutor_id == current_user.id && posttutor.flag == true%>
+		     <div class = "well col-md-12 "> 
+ 			    <div class ="container post">
+            <div class = "pull-left post_status"><h2>Edited by you</h2></div><br><br>
+	 			     <div class = "pull-left post_status"><small> Created <%= post.created_at.strftime("%d/%m/%Y on %I:%M:%S")%></small></div><br>
+	 			   <div class = "org_text"><p class =" center original_text"><%= simple_format(post.original_text)%></p></div><br>
+   			   <div class="row">
+	  			   &nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>&nbsp;</h4>
+	  			   Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.language.name%></h4></div><br><br>
+	  		   <div class="selected-tags ">
+       <%post.tags.each do |pos|%>
+        <span class="label label-info" >
+          <%= pos.name %>
+          <button class="remove-lang" type="button" >
+          </button>
+        </span>
+       <% end %>
+      </div><br><br>
+	  		   <h5 class ="pull-left"> Edited Text: &nbsp; &nbsp;</h5> <br>
+    		   <div class = "org_text"><p class =" center original_text"><%= simple_format(post.edited_text)%></p></div>
+    		   <div class = "pull-left post_status"><small> Edited at <%= post.updated_at.strftime("%d/%m/%Y on %I:%M:%S")%></small></div><br><br> 
+  		    </div>
+         </div>
+        <%end%>
+       <%end%>
+     <%end%>
+     <%end%>

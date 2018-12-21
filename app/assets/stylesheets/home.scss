@@ -4,6 +4,7 @@ body {
 
 .navbar {
   padding-bottom: 30px !important;
+
 }
 
 .heading {
@@ -47,14 +48,14 @@ body {
 }
 
 .post{
-  margin-top:2px;
+  margin-top:4px;
   padding:20px;
   background-color: lightgrey;
   display: inline-block;
 }
 
 .cpost{
-  margin-top:2px;
+  margin-top:4px;
   padding:20px;
   padding-left: 70px;
   display: inline-block;
@@ -62,14 +63,27 @@ body {
 
 .epost{
   padding-top: 30px;
-  margin-top:2px;
+  margin-top:4px;
   background-color: lightgrey;
   display: inline-block;
   padding-bottom: 20px;
 }
 
 .buttonEdit{
-  background-color: #FFBA01;
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 6px 25px;
+  border-radius: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.buttonDecline{
+  background-color:red;
   border: none;
   color: white;
   padding: 6px 25px;
@@ -94,6 +108,10 @@ body {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
+.formAdd{
+  padding: 10px;
+  margin: 10px;
 }
 
 .pag {
@@ -149,6 +167,81 @@ body {
   border-radius: 6px;
   padding: 10px;
 }
+
+
+
+  * {
+  box-sizing: border-box;
+}
+
+body {
+  
+  background: #f2f2f2;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  background: lightgrey;
+  
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+}
+
+.labelx{
+  width: 100%;
+  padding: 20px 30px;
+  background: #e5e5e5;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  color: #7f7f7f;
+  transition: background 0.1s, color 0.1s;
+}
+
+.labelx:hover {
+  background: #d8d8d8;
+}
+
+.labelx:active {
+  background: #ccc;
+}
+
+
+
+
+.input:checked + .labelx {
+  background: #fff;
+  color: #000;
+}
+
+@media (min-width: 600px) {
+  .labelx {
+    width: auto;
+  }
+}
+.panel {
+  display: none;
+
+  width: 1200px;
+  padding: 2px 2px 2px 2px;
+  background: lightgrey;
+}
+
+
+@media (min-width: 600px) {
+  .panel {
+    order: 99;
+  }
+}
+
+.input:checked + .labelx + .panel {
+  display: block;
+}
+
 
 .btn-group{
   width: 100%;
@@ -243,6 +336,7 @@ body {
     vertical-align: baseline;
     border-radius: .25em;
 
+
     .remove-lang {
       background: transparent;
       border: none;
@@ -250,4 +344,76 @@ body {
     }
   }
   
+}
+
+
+.selected-tagg {
+  height: 150px;
+  width: 1200px;
+  background-color: #fff;
+  border-radius: 5px;
+
+  .label-info {
+    background-color: #5bc0de;
+  }
+
+  .label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+
+
+    .remove-lang {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+  
+}
+
+
+.selected-tags {
+  min-height: 15px;
+  min-width: 5px;
+  margin-left: 2px;
+  border-radius: 5px;
+  
+  .label-info {
+    background-color: #5bc0de;
+    padding: 2px;
+  }
+
+  .label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    margin-left: 3px; 
+ 
+    .remove-lang {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+
+
+
+
+
 }

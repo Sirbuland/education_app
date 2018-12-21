@@ -29,6 +29,10 @@
       <li class="<%= activated_class('tutors', 'pending') %>">
         <%= link_to 'Pending Posts', pending_path(id: current_user.id) %>
       </li>
+      <li class="<%= activated_class('tutors', 'postshistory') %>">
+        <%= link_to 'Posts History', postshistory_path(id: current_user.id) %>
+      </li>
+      
       <li class="<%= activated_class('users', 'edit') %>">
         <%= link_to 'Accounts Settings', edit_user_path(current_user) %>
       </li>

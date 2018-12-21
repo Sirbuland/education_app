@@ -7,15 +7,23 @@
 	    			<div class="row">
 			  			&nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>&nbsp;</h4>
 			  			Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.language.name%></h4></div><br><br>
-			 				<% post.tags.each do |pos|%>
-			  				<h5 class ="pull-left"  style="color:#B1A7A7;"> <%= pos.name%> &nbsp; &nbsp;</h5>
-			 				<%end%><br><br>
+						 <div class="selected-tags ">
+			       <%post.tags.each do |pos|%>
+			        <span class="label label-info" >
+			          <%= pos.name %>
+			          <button class="remove-lang" type="button" >
+			          </button>
+			        </span>
+			       <% end %>
+			      </div><br><br>
 			 				<h5 class ="pull-left"> Edited Text: &nbsp; &nbsp;</h5> <br>
 	     				<div class = "org_text"><p class =" center original_text"><%= simple_format(post.edited_text)%></p></div> <br>
 			 				<div class = "pull-left post_status"><small>Edited at <%= post.updated_at.strftime("%d/%m/%Y on %I:%M:%S")%> By 
 				  	<% post.tutors.each do |tutor| %>
-				  		<%= tutor.full_name %>
-				  		<% end %></small><br> </div><br>
+					<% if post.tutor_id == tutor.id %>
+					 <%= tutor.full_name %>
+				   <% end %>	
+				 <% end %></small><br> </div><br>
          </div>
 	     <%end%>	
      <%end%>	

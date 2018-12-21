@@ -7,10 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Language.destroy_all
 I18nData.languages.values.each do |language|
-	Language.create name: language
+	Language.create name: language if language != "English"
 end
-american_english = Language.create(name: 'English (American)')
-british_english = Language.create(name: 'English (British)')
+american_english = Language.find_or_create_by(name: 'English (American)')
+british_english = Language.find_or_create_by(name: 'English (British)')
 
 # create super admin of application
 super_admin = User.find_or_create_by(email: 'admin@test.com')

@@ -28,5 +28,6 @@ Rails.application.routes.draw do
   get '/pending', to: 'tutors#pending'
   get '/editpost', to: 'tutors#editpost'
   post '/updatepost', to: 'tutors#updatepost'
+  get '/postshistory', to: 'tutors#postshistory'
   get '/declinedapplication', to: 'admin#declinedapplication'
 end

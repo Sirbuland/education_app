@@ -101,46 +101,38 @@ $('#tags-table').dataTable({
     sAjaxSource: $('#products').data('source')
   })
 
- $(document).ready(function() {
-         var original_text = $("#original_text");
-         var counter     = $("#counter");
-         var max_length  = counter.data("maximum-length");
-         counter.text(original_text.val().length);
-         original_text.keyup(function() {
-          counter.text($(this).val().length);
-        });
-       });
-
-  $(document).ready(function() {
-   $('#char_count').html($('#original_text').val().length);
-     
-  });
- 
-  $('#original_text').keyup(function() {
-    $('#char_count').html(Math.floor(($(this).val().length/70)))
+  var original_text = $("#original_text");
+  var counter     = $("#counter");
+  var max_length  = counter.data("maximum-length");
+  
+  if ( original_text.length ) {
     
-  });
+    counter.text(original_text.val().length);
+    original_text.keyup(function() {
+      counter.text($(this).val().length);
+    });
+    $('#char_count').html($('#original_text').val().length);
+    $('#char_count').html(Math.floor(($(this).val().length/70)))
 
+  }
 
-
-
-
-
-// 'bJQueryUI': true,
-//     "processing": false,
-//     "bServerSide": true,
-//     "pageLength": 25,
-//     "columnDefs": [
-//       { "targets": [0], "searchable": true, "orderable": true, "visible": true },
-//       { "targets": [1], "searchable": true, "orderable": true, "visible": true },
-//       { "targets": [2], "searchable": true, "orderable": true, "visible": true },
-//       { "targets": [3], "searchable": true, "orderable": true, "visible": true },
-//       { "targets": [4], "searchable": true, "orderable": true, "visible": true },
-//       { "targets": [5], "searchable": true, "orderable": false, "visible": true },
-//       { "targets": [6], "searchable": false, "orderable": false, "visible": true },
-//       { "targets": [7], "searchable": false, "orderable": false, "visible": true },
-//     ],
-//     "ajax": company_usersUrl
+ 
+      
+  // 'bJQueryUI': true,
+  //     "processing": false,
+  //     "bServerSide": true,
+  //     "pageLength": 25,
+  //     "columnDefs": [
+  //       { "targets": [0], "searchable": true, "orderable": true, "visible": true },
+  //       { "targets": [1], "searchable": true, "orderable": true, "visible": true },
+  //       { "targets": [2], "searchable": true, "orderable": true, "visible": true },
+  //       { "targets": [3], "searchable": true, "orderable": true, "visible": true },
+  //       { "targets": [4], "searchable": true, "orderable": true, "visible": true },
+  //       { "targets": [5], "searchable": true, "orderable": false, "visible": true },
+  //       { "targets": [6], "searchable": false, "orderable": false, "visible": true },
+  //       { "targets": [7], "searchable": false, "orderable": false, "visible": true },
+  //     ],
+  //     "ajax": company_usersUrl
 
 })
 

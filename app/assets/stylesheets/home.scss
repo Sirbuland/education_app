@@ -49,7 +49,7 @@ body {
 
 .post{
   margin-top:4px;
-  padding:20px;
+  padding: 20px 35px;
   background-color: lightgrey;
   display: inline-block;
 }
@@ -412,10 +412,18 @@ body {
       cursor: pointer;
     }
   }
+}
 
+.left-content {
+  display: inline-block;
+  margin-right: 20px;
+}
 
-
-
-
-
+.left-content,
+.right-content {
+  width: 450px;
+  label {
+    background-color: white;
+    padding: 0 5px;
+  }
 }

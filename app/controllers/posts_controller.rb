@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
 before_action :set_post, only:[:edit, :update ]
 
-	 def new 
-     @credits = current_user.packages.sum(:total_credits)
+
+	 def new
+
+    @credits = current_user.packages.sum(:total_credits)
      @credits += current_user.packages.sum(:bonus)
      totalcred = current_user.used_credits.sum(:total_credits)
      if @credits > totalcred  
@@ -38,7 +40,7 @@ before_action :set_post, only:[:edit, :update ]
 		   flash[:success] = "Post created successfully"
 		   redirect_to active_path
 		 else
-			render'new'
+		render 'new'
 		 end
    end
    

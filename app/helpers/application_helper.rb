@@ -10,11 +10,5 @@ module ApplicationHelper
       "#{credit} points from this post"
     end
   end
-   def display_points v
-    if v == 1
-      "#{v} point from this post"
-    else 
-      "#{v} points from this post"
-    end
-  end
+   
 end

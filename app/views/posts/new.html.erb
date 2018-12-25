@@ -1,17 +1,17 @@
 <br><h1 align="center">Add new Post</h1><hr>
 <div class="container">
-  <%= render'shared/error', obj:@post %>
+  <%= render'shared/error', obj: @post %>
  <div class="row">
   <div class="col-md-offset-0 col-md-12 ">
    <div class="container center epost">
     <h3 style = "margin-left: 35px;">Add your text here</h3>
-    <%= render'posts/froala' %>
+    
     <div class="col-md-12 offset-0">
      <div class="formAdd offset-0 col-md-10">
       <%= simple_form_for @post, url: posts_path(id: current_user.id), method: :post, html: {multipart: true} do |f| %>
       <%= f.text_area :original_text, maxlength: @maximum_length,rows: 6, class: "form-control",id:'original_text', placeholder: "Add Post here"%>
       <small class="pull-right">Chars : <span id="counter" data-maximum-length="<%= @maximum_length %>"></span>/<%= @maximum_length %></small><br>
-      <p> <span id="char_count"> </span>  points can be deducted</p>
+      <p> <span id="char_count"> </span>  point/s can be deducted</p>
       <%= f.input :category_id, collection: Category.all, label_method: :name, value_method: :id, placeholder: 'Category'%>
       <%= f.input :language_id, collection: Language.all, label_method: :name, value_method: :id, placeholder: 'Language'%>
       <%= f.association :tags, collection: Tag.all, label_method: :name, placeholder: 'Tags', input_html: { class: "multiselect-search form-control", multipe: "multipe" } %>

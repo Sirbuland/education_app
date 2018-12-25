@@ -10,6 +10,13 @@ class AdminController < ApplicationController
 
   end
 
+  def transaction
+    @post = Post.where.not(tutor_id: nil)
+     
+  end
+
+
+
 private
   
   def validate_user

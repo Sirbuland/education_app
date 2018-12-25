@@ -30,4 +30,5 @@ Rails.application.routes.draw do
   post '/updatepost', to: 'tutors#updatepost'
   get '/postshistory', to: 'tutors#postshistory'
   get '/declinedapplication', to: 'admin#declinedapplication'
+  get '/transaction', to: 'admin#transaction'
 end

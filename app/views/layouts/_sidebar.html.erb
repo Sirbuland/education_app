@@ -46,6 +46,9 @@
       <li class="<%= activated_class('packages', 'index') %>">
         <%= link_to 'All Packages', packages_path %>
       </li>
+      <li class="<%= activated_class('admin', 'transaction') %>">
+        <%= link_to 'Transactions', transaction_path %>
+      </li>
       <li class="<%= activated_class('admin', 'declinedapplication') %>">
         <%= link_to 'Declined Applications', declinedapplication_path %>
       </li>

@@ -80,11 +80,13 @@ body {
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
+  float: right;
   cursor: pointer;
 }
 .buttonDecline{
   background-color:red;
   border: none;
+  float: right;
   color: white;
   padding: 6px 25px;
   border-radius: 2px;

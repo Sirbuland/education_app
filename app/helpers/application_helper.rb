@@ -11,4 +11,7 @@ module ApplicationHelper
     end
   end
    
+  def post_language language
+    language.present? ? language.name : ""
+  end
 end

@@ -7,7 +7,7 @@
 		  <div class="row">
 		  &nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
 		  &nbsp;</h4>
-		  Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.language.name%></h4></div><br><br>
+		  Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language %></h4></div><br><br>
 		  <div class="selected-tags ">
 		    <%post.tags.each do |pos|%>
 			    <span class="label label-info" >
@@ -48,7 +48,7 @@
 			<div class="row">
 			&nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
 				 &nbsp;</h4>
-			Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.language.name%></h4></div><br>
+			Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language%></h4></div><br>
 			<div class="selected-tags ">
 			  <%post.tags.each do |pos|%>
 			    <span class="label label-info" >
@@ -85,7 +85,7 @@
 			<div class="row">
 			&nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
 				  &nbsp;</h4>
-			Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.language.name%></h4></div>
+			Language class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language%></h4></div>
 			<div class="selected-tags ">
        <%post.tags.each do |pos|%>
         <span class="label label-info" >

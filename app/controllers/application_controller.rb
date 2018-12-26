@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_student_credits, if: [:user_signed_in?, :is_student?]
 
   def set_student_credits
-    @credits = current_user.packages.sum(:total_credits)
-    @credits += current_user.packages.sum(:bonus)
+  
   end
 
   protected

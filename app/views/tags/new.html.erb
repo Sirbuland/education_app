@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 15px">
  <h1 align="center">Add new Tag</h1><hr>
  <div class="container cpost">
-  <%= render'shared/error', obj:@tag %>
+  <%= render'shared/errors', obj:@tag %>
   <div class="row">
    <div class="col-md-12">
     <%= form_for(@tag, :html => {class: "form-horizontal", role: "form"}) do |f| %>

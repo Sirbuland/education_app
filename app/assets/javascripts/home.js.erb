@@ -110,10 +110,11 @@ $('#tags-table').dataTable({
     counter.text(original_text.val().length);
     original_text.keyup(function() {
       counter.text($(this).val().length);
-    });
-    $('#char_count').html($('#original_text').val().length);
+       $('#char_count').html($('#original_text').val().length);
     $('#char_count').html(Math.floor(($(this).val().length/70)))
 
+    });
+   
   }
 
  

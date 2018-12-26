@@ -18,7 +18,13 @@ body {
   padding: 10px;
     
 }
-
+.error_partial{
+  
+  min-height: 100px;
+overflow: hidden;
+color: black;
+           
+}
 .org_text {
   word-wrap:break-word;
   background-color: #F3ECEC;
@@ -65,8 +71,9 @@ body {
   padding-top: 30px;
   margin-top:4px;
   background-color: lightgrey;
-  display: inline-block;
+  
   padding-bottom: 20px;
+  display:inline-block;
 }
 
 .buttonEdit{

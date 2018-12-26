@@ -11,7 +11,7 @@ class AdminController < ApplicationController
   end
 
   def transaction
-    @post = Post.where.not(tutor_id: nil)
+    @post = Post.where(status: :Closed)
      
   end
 

@@ -1,101 +1,94 @@
 <div class="container"><br>
- <h1 align="center"> Pending Posts</h1><hr>
- <div class="row">
-  <div class = "well col-md-12 col-md-offset-6 ">
-	 <% @posts.each do |post|%>
-	 <% if post.status == "Pending" %>
-	 <% post.post_tutors.each do |posttutor|%>
-    <% if posttutor.flag == true && !posttutor.tutor_id.present? %>
-    
-     <div class="container post">
-      <div class = "pull-right post_status"><small>Post Status:</small><small style = "color: green;"><%= post.status%>  </small></div>
-			<div class = "pull-left post_status"><small> Created at <%= post.created_at.strftime("%d/%m/%Y on %I:%M:%S")%> By <%= post.student.full_name%></small></div><br>
-			<div class = "org_text"><p class =" center original_text"><%= simple_format(post.original_text)%></p></div><br>
+	<% if current_user.languages == [] %>
+   <h1 align="center"> You don't have any Language selected. Choose your Language First</h1>	 
+  <% else %>
+    <h1 align="center"> Pending Posts</h1><hr>
 			<div class="row">
-			  &nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
-			  &nbsp;</h4>
-			  Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language%></h4></div><br><br>
-			<div class="selected-tags ">
-       <%post.tags.each do |pos|%>
-        <span class="label label-info" >
-          <%= pos.name %>
-          <button class="remove-lang" type="button" >
-          </button>
-        </span>
-       <% end %>
-      </div><br><br>
-			<div class = "pull-left post_status"><h5>You can earn 
-						<% post.credits.each do |credit|%>
-							 <%=  display_cedits credit.total_credits/2%>
-							 <% end %> 
-						</h5></div><br><br>
-
-
-         <%= simple_form_for post, url: declinepost_path(id: post.id), method: :post, html: {multipart:  true} do |f| %>
-            <%= f.check_box :correction  %>
-            <%= f.label :correction, "This Post is perfect no correction required "%>
-            <br>
-            <%= f.submit 'Decline', class: 'btn buttonDecline' %>
-          <% end %>
-          
-				<%= link_to "Commit", editpost_path(:id => post.id),:class => "buttonEdit" %>
-			<br>
-		          
-		 </div>
-    
-
+				<div class = "well col-md-12 col-md-offset-6 ">
+		 			<% @posts.each do |post|%>
+		 				<% if post.status == "Pending" %>
+		 				 <% lang = current_user.languages.where id: post.language_id%>
+		 				 <% if !lang.empty?%>
+			 					<% post.post_tutors.each do |posttutor|%>
+		    					<% if posttutor.flag == true && !posttutor.tutor_id.present? %>
+		    						<div class="container post">
+		    							<small class = "postid center"> <%= post.id %></small><br>
+		      						<div class = "pull-right post_status"><small>Post Status:</small><small style = "color: green;"><%= post.status%>  </small></div>
+											<div class = "pull-left post_status"><small> Created  <%= time_ago_in_words(post.created_at)%> ago. By <%= post.student.full_name%></small></div><br>
+											<div class = "org_text"><p class =" center original_text"><%= simple_format(post.original_text)%></p></div><br>
+											<div class="row">
+					  						&nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>&nbsp;</h4>
+					  						Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language%></h4></div><br><br>
+											<div class="selected-tags ">
+		       							<%post.tags.each do |pos|%>
+		        							<span class="label label-info" >
+		          							<%= pos.name %>
+		          							<button class="remove-lang" type="button" ></button>
+		        							</span>
+		       							<% end %>
+		      						</div><br><br>
+											<div class = "pull-left post_status"><h5>You can earn 
+													<% post.credits.each do |credit|%>
+									 					<%=  display_cedits credit.total_credits/2%>
+									 				<% end %> 
+										  	</h5>
+											</div><br><br>
 
 
 
+											
+		          				<%= link_to "Decline", declinepost_path(:id => post.id),:class => "buttonDecline" %>
+		           				<%= link_to "Commit", editpost_path(:id => post.id),:class => "buttonEdit" %>
+											
 
-    <% else if posttutor.tutor_id.present? && posttutor.tutor_id != current_user.id && posttutor.flag == false  %>
 
-     <% p = PostTutor.where  post_id: post.id,tutor_id: current_user.id %>
-     <% if !p.empty? %>
-     <% break %>
- 
-    <% else %>
-     <div class="container post">
-      <div class = "pull-right post_status"><small>Post Status:</small><small style = "color: green;"><%= post.status%>  </small></div>
-			<div class = "pull-left post_status"><small> Created at <%= post.created_at.strftime("%d/%m/%Y on %I:%M:%S")%> By <%= post.student.full_name%></small></div><br>
-			<div class = "org_text"><p class =" center original_text"><%= simple_format(post.original_text)%></p></div><br>
-			<div class="row">
-			  &nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
-			  &nbsp;</h4>
-			  Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language %></h4></div><br><br>
-			<div class="selected-tags ">
-       <%post.tags.each do |pos|%>
-        <span class="label label-info" >
-          <%= pos.name %>
-          <button class="remove-lang" type="button" >
-          </button>
-        </span>
-       <% end %>
-      </div><br><br>
-					<div class = "pull-left post_status"><h5>You can earn 
-						<% post.credits.each do |credit|%>
-							 <%= display_cedits credit.total_credits/2%>
-						<% end %> 
-						</h5></div><br><br>
-			
-         <%= simple_form_for post, url: declinepost_path(id: post.id), method: :post, html: {multipart:  true} do |f| %>
-            <%= f.check_box :correction  %>
-            <%= f.label :correction, "This Post is perfect no correction required "%>
-            <br>
-            <%= f.submit 'Decline', class: 'btn buttonDecline' %>
-          <% end %>
-          
-				<%= link_to "Commit", editpost_path(:id => post.id),:class => "buttonEdit" %>
-			<br>
-		 </div>
-		 <%end%>
-		 <%end%>	
-   <%end%>	
-    <%end%>
-    <%end%>	
-   <%end%>	
-  </div> 
- </div> 
+											<br>
+				          	</div>
+		    
+									<% else if posttutor.tutor_id.present? && posttutor.tutor_id != current_user.id && posttutor.flag == false  %>
+		              	<% p = PostTutor.where  post_id: post.id,tutor_id: current_user.id %>
+		     						<% if !p.empty? %>
+		     							<% break %>
+		 								<% else %>
+		     							<div class="container post">
+		     								<small class = "postid center"> <%= post.id %></small><br>
+		      							<div class = "pull-right post_status"><small>Post Status:</small><small style = "color: green;"><%= post.status%>  </small></div>
+												<div class = "pull-left post_status"><small> Created <%= time_ago_in_words(post.updated_at)%> ago. By <%= post.student.full_name%></small></div><br>
+												<div class = "org_text"><p class =" center original_text"><%= simple_format(post.original_text)%></p></div><br>
+												<div class="row">
+					  							&nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>&nbsp;</h4>
+					  							Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language %></h4></div><br><br>
+												<div class="selected-tags ">
+		       								<%post.tags.each do |pos|%>
+		        								<span class="label label-info" >
+		          								<%= pos.name %>
+		          								<button class="remove-lang" type="button" ></button>
+		        								</span>
+		       								<% end %>
+		      							</div><br><br>
+												<div class = "pull-left post_status"><h5>You can earn 
+														<% post.credits.each do |credit|%>
+									 						<%= display_cedits credit.total_credits/2%>
+														<% end %> 
+													</h5>
+												</div><br><br>
+											
+
+
+
+		          					<%= link_to "Decline", declinepost_path(:id => post.id),:class => "buttonDecline" %>
+		        						<%= link_to "Commit", editpost_path(:id => post.id),:class => "buttonEdit" %><br>
+				 							</div>
+				 						<%end%>
+			 					  <%end%>
+			 					  <%end%>
+			 					<%end%>	
+	   					<%end%>	
+	    			<%end%>	
+	   		<%end%>	
+	  	</div> 
+	 	</div>
+	<% end %> 
 </div> 
 
 

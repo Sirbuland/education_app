@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get '/active', to: 'posts#active'
   post '/acceptapp', to: 'posts#acceptapp'
   post '/declineapp', to: 'posts#declineapp'
-  post '/declinepost', to: 'tutors#declinepost'
+  get '/declinepost', to: 'tutors#declinepost'
   get '/pending', to: 'tutors#pending'
   get '/editpost', to: 'tutors#editpost'
   post '/updatepost', to: 'tutors#updatepost'

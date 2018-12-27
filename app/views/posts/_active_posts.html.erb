@@ -1,8 +1,9 @@
 <% @posts.each do |post|%>
 	<% if post.status == "Pending"%>
 		<div class= "container post">
+			<small class = "postid center"> <%= post.id %></small><br>
 		  <div class = "pull-right post_status"><small>Post Status:</small> <small style = "color: green;"><%= post.status%></small></div>
-		  <div class = "pull-left post_status"><small> Created at <%= post.created_at.strftime("%d/%m/%Y on %I:%M:%S")%>    </small></div><br>
+		  <div class = "pull-left post_status"><small> Created <%= time_ago_in_words(post.created_at)%> ago </small></div><br>
 		  <div class = "org_text"><p class =" center original_text"><%= simple_format(post.original_text)%></p></div><br>
 		  <div class="row">
 		  &nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
@@ -20,10 +21,63 @@
 		  <br/>
 		  <br/>
 		</div>
+
+
+
   <% elsif post.status == "Edited"%>
-		<div class= "container post">
+		<% if post.edited_text == nil %>
+   <div class= "container post">
+			<small class = "postid center"> <%= post.id %></small><br>
 			<div class = "pull-right post_status"><small>Post Status:</small> <small style = "color: #FFBA01;"><%= post.status%></small></div>
-			<div class = "pull-left post_status"><small> Created at <%= post.created_at.strftime("%d/%m/%Y on %I:%M:%S")%>  </small></div><br>
+			<div class = "pull-left post_status"><small> Created <%= time_ago_in_words(post.created_at)%> ago</small></div><br>
+			<br/>
+						<label>Original text</label>
+						<br/>
+						<div class="org_text left">
+							<%= simple_format(post.original_text) %>
+						</div>
+					
+						<div class="container" style = "background-color: white;">
+								<h3>Your Text is Perfect</h3>
+							</div>
+     <br/>
+			<div class="row">
+			&nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
+				 &nbsp;</h4>
+			Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language%></h4></div><br>
+			<div class="selected-tags ">
+			  <%post.tags.each do |pos|%>
+			    <span class="label label-info" >
+			      <%= pos.name %>
+			      <button class="remove-lang" type="button" >
+			      </button>
+			    </span>
+			  <% end %>
+		  </div>
+			<br/>
+			<div class = "pull-left post_status"><small>Edited <%= time_ago_in_words(post.updated_at)%> ago. By 
+				<% post.tutors.each do |tutor| %>
+						<% if post.tutor_id == tutor.id %>
+						 <%= tutor.full_name %>
+					   <% end %>	
+					 <% end %>
+					</small>
+			</div><br>
+			<div class="pull-right buttons">
+				<%= button_to 'Decline', {:controller => "posts", :action => "declineapp", :id => post.id},
+				    {:class => "buttonDec"}%>
+			</div>
+			<div class="pull-right buttons">
+				<%= button_to 'Accept', {:controller => "posts", :action => "acceptapp", :id => post.id},
+				    {:class => "buttonAcc" }%>
+			</div>
+		</div>
+  
+		<% else %>
+   <div class= "container post">
+			<small class = "postid center"> <%= post.id %></small><br>
+			<div class = "pull-right post_status"><small>Post Status:</small> <small style = "color: #FFBA01;"><%= post.status%></small></div>
+			<div class = "pull-left post_status"><small> Created <%= time_ago_in_words(post.created_at)%> ago</small></div><br>
 			<br/>
 			<div class="picadiff">
 				<div class="picadiff-title"></div>
@@ -36,11 +90,12 @@
 						</div>
 					</div>
 					<div class="right-content">
-						<label>Edited text</label>
-						<br/>
-						<div class="edited_text right" style = "background-color: white;">
-							<%= simple_format(post.edited_text) %>
-						</div>
+						
+							<label>Edited text</label><br/>
+							<div class="org_text right" style = "background-color: white;">
+								<%= simple_format(post.edited_text) %>
+							</div>
+							
 					</div>
 				</div>
 			</div>
@@ -59,7 +114,7 @@
 			  <% end %>
 		  </div>
 			<br/>
-			<div class = "pull-left post_status"><small>Edited at <%= post.updated_at.strftime("%d/%m/%Y on %I:%M:%S")%>   By 
+			<div class = "pull-left post_status"><small>Edited <%= time_ago_in_words(post.updated_at)%> ago. By 
 				<% post.tutors.each do |tutor| %>
 						<% if post.tutor_id == tutor.id %>
 						 <%= tutor.full_name %>
@@ -76,16 +131,17 @@
 				    {:class => "buttonAcc" }%>
 			</div>
 		</div>
-
+  <% end %>
   <% elsif post.status == "SubmittedToAdmin"%>
 		<div class= "container post">
+			<small class = "postid center"> <%= post.id %></small><br>
 			<div class = "pull-right post_status"><small>Post Status:</small> <small style = "color: #581845;">Submitted To Admin</small></div>
-			<div class = "pull-left post_status"><small> Created at <%= post.created_at.strftime("%d/%m/%Y on %I:%M:%S")%> </small></div><br>
+			<div class = "pull-left post_status"><small> Created <%= time_ago_in_words(post.created_at)%> ago. </small></div><br>
 			<div class = "org_text"><p class =" center original_text"><%= simple_format(post.original_text)%></p></div><br>
 			<div class="row">
 			&nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>
 				  &nbsp;</h4>
-			Language class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language%></h4></div>
+			Language <h4 class ="pull-left" style="color:#B1A7A7;"> &nbsp;<%= post_language post.language%></h4></div>
 			<div class="selected-tags ">
        <%post.tags.each do |pos|%>
         <span class="label label-info" >
@@ -95,10 +151,18 @@
         </span>
        <% end %>
       </div><br><br>
-			<h5 class ="pull-left"> Edited Text: &nbsp; &nbsp;</h5> <br>
-			<div class = "org_text"><p class =" center original_text"><%= simple_format(post.edited_text)%></p></div><br>
+			<% if post.edited_text == nil %>
+							<div class="container" style = "background-color: white;">
+								<h2>Your Text is Perfect</h2>
+							</div>
+						<% else %>
+							<label>Edited text</label><br/>
+							<div class="org_text right" style = "background-color: white;">
+								<%= simple_format(post.edited_text) %>
+							</div>
+						<% end %>
 			<div class = "pull-left post_status">
-				<small>Edited at <%= post.updated_at.strftime("%d/%m/%Y on %I:%M:%S")%>
+				<small>Edited <%= time_ago_in_words(post.updated_at)%> ago.%>
 			  By 
 				<% post.tutors.each do |tutor| %>
 					<% if post.tutor_id == tutor.id %>

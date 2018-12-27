@@ -2,9 +2,10 @@
 		<div class = "well col-md-12 "> 
  		<% if post.status == "Closed"%>
   		<div class ="container post">
+  			<small class = "postid center"> <%= post.id %></small><br>
    			<div class = "pull-right post_status"><small>Post Status:</small>
     			<small style = "color: red;"><%= post.status %> </small></div>
-	 			<div class = "pull-left post_status"><small> Created <%= post.created_at.strftime("%d/%m/%Y on %I:%M:%S")%></small></div><br>
+	 			<div class = "pull-left post_status"><small> Created <%= time_ago_in_words(post.created_at)%> ago</small></div><br>
 	 			<div class = "org_text"><p class =" center original_text"><%= simple_format(post.original_text)%></p></div><br>
    			<div class="row">
 	  			&nbsp;&nbsp;Category:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post.category.name%>&nbsp;</h4>
@@ -18,9 +19,19 @@
         </span>
        <% end %>
       </div><br><br>
-	  		<h5 class ="pull-left"> Edited Text: &nbsp; &nbsp;</h5> <br>
-    		<div class = "org_text"><p class =" center original_text"><%= simple_format(post.edited_text)%></p></div>
-    		<div class = "pull-left post_status"><small>Edited <%= post.updated_at.strftime("%d/%m/%Y on %I:%M:%S")%>. By 
+	  		
+						<% if post.edited_text == nil %>
+							<div class="container" style = "background-color: white;">
+								<h2>Your Text is Perfect</h2>
+							</div>
+						<% else %>
+							<label>Edited text</label><br/>
+							<div class="org_text right" style = "background-color: white;">
+								<%= simple_format(post.edited_text) %>
+							</div>
+						<% end %>	
+					
+    		<div class = "pull-left post_status"><small>Edited <%= time_ago_in_words(post.updated_at)%> ago. By 
 		  	<% post.tutors.each do |tutor| %>
 					<% if post.tutor_id == tutor.id %>
 					 <%= tutor.full_name %>

@@ -16,24 +16,7 @@ class TutorsController < ApplicationController
   end
  
   def declinepost
-     params.require(:post).permit(:correction)
-     if params[:post][:correction] == "1"
-    
-      @post = Post.find(params[:id])
-      @post.update_attribute(:correction,true)
-      @post.update_attribute(:status,"Edited")
-      @post.update_attribute(:tutor_id,current_user.id)
-      
-      @posttutor = PostTutor.find_by post_id: params[:id] 
-      @posttutor.update_attribute(:flag,false)
-    
-      @posttutor1 = PostTutor.new
-      @posttutor1.post_id = @post.id  
-      @posttutor1.tutor_id = current_user.id
-      
-
-    
-   else
+     
      @post  = Post.find(params[:id])
      @posttutor = PostTutor.find_by post_id: params[:id]
      @posttutor.update_attribute(:flag,false)
@@ -42,31 +25,49 @@ class TutorsController < ApplicationController
      @posttutor1.tutor_id = current_user.id
      @posttutor1.flag = false
     
-  end
+  
     if @posttutor1.save
       redirect_back(fallback_location: pending_path)
     end
   end
 
   def updatepost
-    @post = Post.find(params[:id])
-    @post.status="Edited"
-    @post.tutor_id= current_user.id
-    @posttutor = PostTutor.find_by post_id: params[:id] 
-    @posttutor.update_attribute(:flag,false)
+   
+   
+     if params[:post][:correction] == "1"
     
-    @posttutor1 = PostTutor.new
-    @posttutor1.post_id = @post.id  
-    @posttutor1.tutor_id = current_user.id
-    @posttutor1.save
+      @post = Post.find(params[:id])
+      @post.update_attribute(:correction,true)
+      @post.update_attribute(:status,"Edited")
+      @post.update_attribute(:edited_text,nil)
+      @post.update_attribute(:tutor_id,current_user.id)
+      
+      @posttutor = PostTutor.find_by post_id: params[:id] 
+      @posttutor.update_attribute(:flag,false)
+    
+      @posttutor1 = PostTutor.new
+      @posttutor1.post_id = @post.id  
+      @posttutor1.tutor_id = current_user.id
 
+     else
 
-    if @post.update(post_params)
+      @post = Post.find(params[:id])
+      @post.update_attribute(:status,"Edited")
+      @post.update_attribute(:edited_text,params[:post][:edited_text])
+      @post.update_attribute(:tutor_id,current_user.id)
+      @posttutor = PostTutor.find_by post_id: params[:id] 
+      @posttutor.update_attribute(:flag,false)
+      
+      @posttutor1 = PostTutor.new
+      @posttutor1.post_id = @post.id  
+      @posttutor1.tutor_id = current_user.id
+      
       #@credit.update_attribute(:tutor_id, current_user.id)
-      flash[:success] = "Post edited successfully"
-      redirect_to pending_path
-    else
-      render'editpost'
+      
+     end
+    if @posttutor1.save
+     flash[:success] = "Post edited successfully"
+     redirect_to pending_path
     end
   end
 
@@ -116,7 +117,7 @@ class TutorsController < ApplicationController
   end
   
   def post_params
-    params.require(:post).permit(:edited_text,:tutor_id,:status)
+    params.require(:post).permit(:edited_text,:tutor_id,:status,:correction)
   end
 
 end

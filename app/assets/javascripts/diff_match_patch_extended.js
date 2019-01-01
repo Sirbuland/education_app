@@ -224,28 +224,34 @@ DiffHandler.prototype.alligned_texts = function(diffs, maxchars){
 		var data = diffs[x][1];
 
 		switch(op){
-		case DIFF_INSERT:
-			diss_line.append(dataArraytoString(data), "insertion");
-			break;
-		case DIFF_DELETE:
-			source_line.append(dataArraytoString(data), "deletion");
-			break;
-		case DIFF_EQUAL:
-			var disstext = dataArraytoString2D(data,1);
-			var sourcetext = dataArraytoString2D(data,0);
-			if(disstext.length>10){
-				var maximumLines = Math.max(source_line.linecount, diss_line.linecount);
-				source_line.setLineCountTo(maximumLines);
-				diss_line.setLineCountTo(maximumLines);
-				source_line.append(sourcetext, "equal");
-				diss_line.append(disstext, "equal");
-			} else{
-				diss_line.append(disstext, "insertion");
-				source_line.append(sourcetext, "deletion");
-			}
+    
+      case DIFF_EQUAL:
+      var disstext = dataArraytoString2D(data,1);
+      var sourcetext = dataArraytoString2D(data,0);
+      if(disstext.length>10){
+        var maximumLines = Math.max(source_line.linecount, diss_line.linecount);
+        source_line.setLineCountTo(maximumLines);
+        diss_line.setLineCountTo(maximumLines);
+        source_line.append(sourcetext, "equal");
+        diss_line.append(disstext, "equal");
+      } else{
+        diss_line.append(disstext, "equal");
+        source_line.append(sourcetext, "equal");
+      }
 
-			break;
-		}
+      break;
+
+    case DIFF_DELETE:
+          diss_line.append(dataArraytoString(data), "deletion");
+
+      source_line.append(dataArraytoString(data), "equal");
+      break;
+    case DIFF_INSERT:
+      diss_line.append(dataArraytoString(data), "insertion");
+      break;
+    
+    }		
+
 	}
 
 	return {"diss_html":diss_line.line, "source_html":source_line.line};

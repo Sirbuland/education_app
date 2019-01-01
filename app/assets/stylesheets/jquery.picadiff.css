@@ -54,6 +54,8 @@
       /*border-bottom: 1px solid;*/ }
     .picadiff .right .light, .picadiff .left .light {
       background-color: #aaa; }
-    .picadiff .right .insertion, .picadiff .left .insertion {
+    .insertion {
       background-color: #a7f1dc !important;
       /*color:#c61818;*/ }
+     .deletion {
+      text-decoration: line-through !important; }

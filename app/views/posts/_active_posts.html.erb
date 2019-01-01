@@ -1,5 +1,7 @@
 <% @posts.each do |post|%>
+
 	<% if post.status == "Pending"%>
+		
 		<div class= "container post">
 			<small class = "postid center"> <%= post.id %></small><br>
 		  <div class = "pull-right post_status"><small>Post Status:</small> <small style = "color: green;"><%= post.status%></small></div>
@@ -10,6 +12,7 @@
 		  &nbsp;</h4>
 		  Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language %></h4></div><br><br>
 		  <div class="selected-tags ">
+		  
 		    <%post.tags.each do |pos|%>
 			    <span class="label label-info" >
 			      <%= pos.name %>
@@ -17,6 +20,7 @@
 			      </button>
 			    </span>
 		    <% end %>
+		 
 		  </div>
 		  <br/>
 		  <br/>
@@ -25,8 +29,10 @@
 
 
   <% elsif post.status == "Edited"%>
+		
 		<% if post.edited_text == nil %>
-   <div class= "container post">
+   
+     <div class= "container post">
 			<small class = "postid center"> <%= post.id %></small><br>
 			<div class = "pull-right post_status"><small>Post Status:</small> <small style = "color: #FFBA01;"><%= post.status%></small></div>
 			<div class = "pull-left post_status"><small> Created <%= time_ago_in_words(post.created_at)%> ago</small></div><br>
@@ -46,6 +52,7 @@
 				 &nbsp;</h4>
 			Language:<h4 class ="pull-left"style="color:#B1A7A7;"> &nbsp;<%= post_language post.language%></h4></div><br>
 			<div class="selected-tags ">
+			
 			  <%post.tags.each do |pos|%>
 			    <span class="label label-info" >
 			      <%= pos.name %>
@@ -53,14 +60,17 @@
 			      </button>
 			    </span>
 			  <% end %>
+		  
 		  </div>
 			<br/>
 			<div class = "pull-left post_status"><small>Edited <%= time_ago_in_words(post.updated_at)%> ago. By 
+			
 				<% post.tutors.each do |tutor| %>
 						<% if post.tutor_id == tutor.id %>
 						 <%= tutor.full_name %>
 					   <% end %>	
 					 <% end %>
+			
 					</small>
 			</div><br>
 			<div class="pull-right buttons">
@@ -73,27 +83,40 @@
 			</div>
 		</div>
   
-		<% else %>
+		<% elsif post.edited_text.present? %>
+
+
+
+		<script type="text/javascript">
+	$(document).ready(function() {
+		var diff = $(".picadiff-<%=post.id%>").picadiff({
+			leftContainer: '.left-<%=post.id%>',
+			rightContainer: '.right-<%=post.id%>',
+		});
+		console.log(diff)
+	});
+</script>
+   
    <div class= "container post">
-			<small class = "postid center"> <%= post.id %></small><br>
+		<small class = "postid center"> <%= post.id %></small><br>
 			<div class = "pull-right post_status"><small>Post Status:</small> <small style = "color: #FFBA01;"><%= post.status%></small></div>
 			<div class = "pull-left post_status"><small> Created <%= time_ago_in_words(post.created_at)%> ago</small></div><br>
 			<br/>
-			<div class="picadiff">
-				<div class="picadiff-title"></div>
+		 <div class="picadiff-<%=post.id%>">
+				
 				<div class="picadiff-content">
 					<div class="left-content">
 						<label>Original text</label>
 						<br/>
-						<div class="org_text left">
-							<%= simple_format(post.original_text) %>
+						<div class="org_text left-<%=post.id%>">
+							<%= post.original_text %>
 						</div>
 					</div>
 					<div class="right-content">
 						
 							<label>Edited text</label><br/>
-							<div class="org_text right" style = "background-color: white;">
-								<%= simple_format(post.edited_text) %>
+							<div class="org_text right-<%=post.id%>" style = "background-color: white;">
+								<%= post.edited_text %>
 							</div>
 							
 					</div>
@@ -120,6 +143,7 @@
 						 <%= tutor.full_name %>
 					   <% end %>	
 					 <% end %>
+					
 					</small>
 			</div><br>
 			<div class="pull-right buttons">
@@ -132,6 +156,7 @@
 			</div>
 		</div>
   <% end %>
+ 
   <% elsif post.status == "SubmittedToAdmin"%>
 		<div class= "container post">
 			<small class = "postid center"> <%= post.id %></small><br>
@@ -170,14 +195,15 @@
 				   <% end %>	
 				 <% end %>
 			</small>
+		
 			</div>
 			<br>
-		</div>
-		<br/>
-		<br/>
+</div>
   <%end%>
 <%end%>
-
+<br/><br/>
 <div class = "centera">
 	<%= will_paginate @posts %>
 </div>
+
+

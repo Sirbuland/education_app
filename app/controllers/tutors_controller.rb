@@ -1,7 +1,8 @@
 class TutorsController < ApplicationController
 	before_action :authenticate_user!
   before_action :set_tutor
- 
+ before_action :validate_user
+
 
   def edit
    @languages = Language.order(:name)
@@ -86,6 +87,12 @@ class TutorsController < ApplicationController
   end
 
   private
+
+  def validate_user
+    if current_user.role != 1
+      redirect_to root_path
+    end 
+   end  
 
   def set_tutor
   	@tutor = current_user

@@ -187,7 +187,7 @@
 							</div>
 						<% end %>
 			<div class = "pull-left post_status">
-				<small>Edited <%= time_ago_in_words(post.updated_at)%> ago.%>
+				<small>Edited <%= time_ago_in_words(post.updated_at)%> ago.
 			  By 
 				<% post.tutors.each do |tutor| %>
 					<% if post.tutor_id == tutor.id %>

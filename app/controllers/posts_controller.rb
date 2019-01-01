@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
 before_action :set_post, only:[:edit, :update ]
-
-
+before_action :validate_user
 	 def new
 
     @credits = current_user.packages.sum(:total_credits)
@@ -111,7 +110,11 @@ before_action :set_post, only:[:edit, :update ]
 	 end
 	 
  private 
-   
+   def validate_user
+    if current_user.role != 0
+      redirect_to root_path
+    end 
+   end  
     def set_post
      @post = Post.find(params[:id])
     end

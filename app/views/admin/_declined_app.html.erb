@@ -19,7 +19,7 @@
 			      </div><br><br>
 			 				<h5 class ="pull-left"> Edited Text: &nbsp; &nbsp;</h5> <br>
 	     				<div class = "org_text"><p class =" center original_text"><%= simple_format(post.edited_text)%></p></div> <br>
-			 				<div class = "pull-left post_status"><small>Edited time_ago_in_words(post.updated_at)%> ago. By 
+			 				<div class = "pull-left post_status"><small>Edited <%= time_ago_in_words(post.updated_at)%> ago. By 
 				  	<% post.tutors.each do |tutor| %>
 					<% if post.tutor_id == tutor.id %>
 					 <%= tutor.full_name %>

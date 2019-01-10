@@ -7,5 +7,5 @@ test:
  
 production:
   adapter: redis
-   url: redis://redistogo:6381f6326dac81de4fa348f718c0bda1@tarpon.redistogo.com:9489/
-   channel_prefix: appname_production
+  url: redis://redistogo:6381f6326dac81de4fa348f718c0bda1@tarpon.redistogo.com:9489/
+  channel_prefix: appname_production

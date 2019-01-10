@@ -14,8 +14,9 @@ class TutorsController < ApplicationController
   
   def editpost
     @post  = Post.find(params[:id])
-  end
- 
+    @post.update_attribute(:status,"Edited")
+      
+ end
   def declinepost
      
      @post  = Post.find(params[:id])

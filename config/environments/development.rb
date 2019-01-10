@@ -15,10 +15,12 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-
+  config.reload_classes_only_on_change = true
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
+    ActionCable.server.config.log_tags = [ :action_cable, -> request { request.uuid } ]
 
+  ENV["REDISTOGO_URL"] = 'redis://username:password@my.host:6379'
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 

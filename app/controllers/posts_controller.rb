@@ -37,9 +37,12 @@ before_action :validate_user
        @posttutor.save
        @credits.save
 		   flash[:success] = "Post created successfully"
-		   redirect_to active_path
+       
+		  # ActionCable.server.broadcast "posts_channel" ,{post: PostsController.render(partial: 'layouts/post', locals:{post: @post}).squish}
+       PostRelayJob.perform_later(@post)
+       redirect_to active_path
 		 else
-		render 'new'
+		 render 'new'
 		 end
    end
    

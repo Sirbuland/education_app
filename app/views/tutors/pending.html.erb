@@ -5,12 +5,14 @@
     <h1 align="center"> Pending Posts</h1><hr>
 			<div class="row">
 				<div class = "well col-md-12 col-md-offset-6 ">
+		 			<div id = "postaa"></div>
 		 			<% @posts.each do |post|%>
 		 				<% if post.status == "Pending" %>
 		 				 <% lang = current_user.languages.where id: post.language_id%>
 		 				 <% if !lang.empty?%>
 			 					<% post.post_tutors.each do |posttutor|%>
 		    					<% if posttutor.flag == true && !posttutor.tutor_id.present? %>
+
 		    						<div class="container post">
 		    							<small class = "postid center"> <%= post.id %></small><br>
 		      						<div class = "pull-right post_status"><small>Post Status:</small><small style = "color: green;"><%= post.status%>  </small></div>

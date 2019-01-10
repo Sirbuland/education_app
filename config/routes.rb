@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   resources :tags
   resources :categories
   resources :posts 
+
+  mount ActionCable.server => '/cable'
+
+
   get '/history', to: 'posts#history'
   get '/active', to: 'posts#active'
   post '/acceptapp', to: 'posts#acceptapp'

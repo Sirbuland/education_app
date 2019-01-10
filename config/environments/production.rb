@@ -23,7 +23,8 @@ Rails.application.configure do
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
-
+  config.web_socket_server_url = "wss://educationapp.herokuapp.com/cable" 
+  config.action_cable.allowed_request_origins = ['https://educationapp.herokuapp.com', 'http://educationapp.herokuapp.com']
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass

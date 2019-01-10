@@ -20,7 +20,6 @@ Rails.application.configure do
   config.active_support.deprecation = :log
     ActionCable.server.config.log_tags = [ :action_cable, -> request { request.uuid } ]
 
-  ENV["REDISTOGO_URL"] = 'redis://username:password@my.host:6379'
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 

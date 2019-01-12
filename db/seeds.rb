@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Language.destroy_all
 
- american_english = Language.find_or_create_by(name: 'North American English')
+ american_english = Language.find_or_create_by(name: 'English (North American)')
  british_english = Language.find_or_create_by(name: 'English (UK)')
 
 # create super admin of application

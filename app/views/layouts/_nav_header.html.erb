@@ -22,11 +22,11 @@
       <% @credits += current_user.packages.sum(:bonus) %>
      
 			<% credit =  @credits - current_user.used_credits.sum(:total_credits) %>
-			<span>Hello <%= current_user.username %>! you have earned <%= credit  %> credits.</span>
+			<span>Hello <%= current_user.username %>! you have <%= credit  %> credits.</span>
 				<%= link_to 'Buy Credits', credits_path, class: 'btn btn-sm btn-info' %>
 						<% end %>
 			<% if current_user.super_admin%>
-			<span>Hello <%= current_user.username %>! you have earned <%= current_user.admin_credits.sum(:total_credits) %> credits.</span>
+			<span>Hello <%= current_user.username %>! you have <%= current_user.admin_credits.sum(:total_credits) %> credits.</span>
 			<% end %>
 			<% if current_user.role == 1 %>
 			<span>Hello <%= current_user.username %>! you have earned <%= current_user.availed_credits.sum(:total_credits) %> credits.</span>

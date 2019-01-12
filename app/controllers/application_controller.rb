@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     elsif resource.role == 0
       edit_student_path(id: resource.id)
     elsif resource.role == 1
-      edit_tutor_path(id: resource.id)
+      pending_path(id: resource.id)
     end
   end
 

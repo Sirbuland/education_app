@@ -55,7 +55,7 @@
     .picadiff .right .light, .picadiff .left .light {
       background-color: #aaa; }
     .insertion {
-      color: #606fda;
+      background-color: #99c6ff;
     }
     .deletion {
       text-decoration: line-through;

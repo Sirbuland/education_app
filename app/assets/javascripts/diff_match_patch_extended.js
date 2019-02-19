@@ -21,11 +21,16 @@ var Alignment = function(){
  * Appends a text with word wrapping after specified number of characters
 */
 
-Alignment.prototype.append = function(text, classname){
+Alignment.prototype.append = function(text, classname, src_text){
   var textsplit = text.split(" ");
+
+  var src_split = []
+  if(!!src_text) { src_split = src_text.split(" ") };
+
   if(classname) {
     this.line += '<span class="'+classname+'">';
   }
+
   for(var i in textsplit){
     this.charcount += textsplit[i].length + 1;
     this.wordcount += 1;
@@ -35,8 +40,15 @@ Alignment.prototype.append = function(text, classname){
       this.charcount = textsplit[i].length;
       this.wordcount = 1;
     }
-
-    this.line += textsplit[i] + " ";
+    if ( !!src_text && classname === 'equal' && textsplit[i] !== src_split[i] ) {
+      this.line += "</span> ";
+      this.line += "<span class='deletion'>"
+      this.line += src_split[i]
+      this.line += "</span> <span class='insertion'>"
+      this.line += textsplit[i] + " </span><span class='equal'>"
+    } else {
+      this.line += textsplit[i] + " ";
+    }
 
   }
   this.line = this.line.trim();
@@ -218,45 +230,46 @@ DiffHandler.prototype.alligned_texts = function(diffs, maxchars){
 
 	source_line.maxchars=maxchars;
 	diss_line.maxchars=maxchars;
-
-	for(var x = 0; x < diffs.length; x++){
-		var op = diffs[x][0];
-		var data = diffs[x][1];
+  for(var x = 0; x < diffs.length; x++){
+    var op = diffs[x][0];
+    var data = diffs[x][1];
 
 		switch(op){
     
       case DIFF_EQUAL:
-      var disstext = dataArraytoString2D(data,1);
-      var sourcetext = dataArraytoString2D(data,0);
-      if(disstext.length>10){
-        var maximumLines = Math.max(source_line.linecount, diss_line.linecount);
-        source_line.setLineCountTo(maximumLines);
-        diss_line.setLineCountTo(maximumLines);
-        source_line.append(sourcetext, "equal");
-        diss_line.append(disstext, "equal");
-      } else{
-        diss_line.append(disstext, "equal");
-        source_line.append(sourcetext, "equal");
-      }
+        var disstext = dataArraytoString2D(data,1);
+        var sourcetext = dataArraytoString2D(data,0);
+        if(disstext.length>10){
+          var maximumLines = Math.max(source_line.linecount, diss_line.linecount);
+          source_line.setLineCountTo(maximumLines);
+          diss_line.setLineCountTo(maximumLines);
+          source_line.append(sourcetext, "equal");
+          compareEqualText(disstext, sourcetext, diss_line)
+        } else{
+          diss_line.append(disstext, "equal");
+          source_line.append(sourcetext, "equal");
+        }
 
-      break;
+        break;
 
-    case DIFF_DELETE:
-          diss_line.append(dataArraytoString(data), "deletion");
-
-      source_line.append(dataArraytoString(data), "equal");
-      break;
-    case DIFF_INSERT:
-      diss_line.append(dataArraytoString(data), "insertion");
-      break;
-    
+      case DIFF_DELETE:
+        diss_line.append(dataArraytoString(data), "deletion");
+        source_line.append(dataArraytoString(data), "equal");
+        break;
+      case DIFF_INSERT:
+        diss_line.append(dataArraytoString(data), "insertion");
+        break;
     }		
-
 	}
 
 	return {"diss_html":diss_line.line, "source_html":source_line.line};
 
 };
+
+
+var compareEqualText = function(disstext, sourcetext, diss_line) {
+  diss_line.append(disstext, "equal", sourcetext);
+}
 
 /**
  * Constructs a HTML representation of the diff with alignment of the equal
@@ -370,12 +383,10 @@ jQuery.extend(diff_match_patch.prototype, {
     this.word_dict = {};
     this.charcode = 21;
     this.textnumber = 0;
-
+    
     this.char_dict= {};
     var textchars1 = this.words_to_characters(textarr1);
     var textchars2 = this.words_to_characters(textarr2);
-
-
     var diffs = this.diff_main(textchars1, textchars2, lebool);
     var result = [];
     for(var x = 0; x < diffs.length; x++){

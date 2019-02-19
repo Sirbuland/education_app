@@ -22,8 +22,8 @@
       if(!this.diff){
         var left = this.left;
         var right = this.right;
+
         this.diff = this.dmp.diff_wordbased(left, right,false);
-        //dmp.diff_cleanupSemantic(this.diff);
       }
       return this.diff;
     },
@@ -82,13 +82,11 @@
         rightTitle  : settings.rightTitle || $this.find(settings.titleContainer+' '+settings.rightContainer).text(),
         right   : settings.rightContent || $this.find(settings.contentContainer+' '+settings.rightContainer).text()
       };
-
       var compareData = new CompareData(referenceData, settings);
 
       var lineLength = settings.lineLength;
       var html_texts = settings.wrap ? compareData.getHtmlTextStrict(lineLength) :
         compareData.getHtmlTexts(lineLength);
-        console.log(compareData.getDiff());
       var left = html_texts.source_html;
       var right = html_texts.diss_html;
 

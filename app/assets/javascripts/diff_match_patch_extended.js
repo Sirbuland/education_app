@@ -41,11 +41,28 @@ Alignment.prototype.append = function(text, classname, src_text){
       this.wordcount = 1;
     }
     if ( !!src_text && classname === 'equal' && textsplit[i] !== src_split[i] ) {
-      this.line += "</span> ";
-      this.line += "<span class='deletion'>"
-      this.line += src_split[i]
-      this.line += "</span> <span class='insertion'>"
-      this.line += textsplit[i] + " </span><span class='equal'>"
+      for( j = 0; j < textsplit[i].length; j++ ) {
+        if ( textsplit[i][j] != src_split[i][j] ) {
+          this.line += "</span> ";
+          this.line += "<span class='deletion'>"
+          if (!src_split[i][j]) { 
+            this.line += " "
+          } else {
+            this.line += src_split[i][j]
+          }
+          this.line += "</span> <span class='insertion'>"
+          if (!textsplit[i][j]) { 
+            this.line += " "
+          } else {
+            this.line += textsplit[i][j]
+          }
+          this.line += "</span><span class='equal'>"
+        } else {
+          this.line += textsplit[i][j]
+        }
+      }
+      this.line += " "
+      
     } else {
       this.line += textsplit[i] + " ";
     }
